@@ -4,19 +4,20 @@
    ================================================================= */
 
 /* ---------- Fonts (self-hosted, DSGVO-konform) ----------
-   Variable WOFF2, lokal eingebunden – kein externer Request an Google.
-   Inter deckt 400–700 ab, Sora 600–800. */
+   Variable WOFF2 (Google-Fonts-Latin-Subset, inkl. äöüß€), lokal eingebunden –
+   kein externer Request. Per fonttools instanziert: Inter wght 400–700,
+   Sora wght 600–800. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400 700;
   font-display: swap;
   src: url("../fonts/inter-latin.woff2") format("woff2");
 }
 @font-face {
   font-family: "Sora";
   font-style: normal;
-  font-weight: 100 800;
+  font-weight: 600 800;
   font-display: swap;
   src: url("../fonts/sora-latin.woff2") format("woff2");
 }
@@ -85,6 +86,12 @@ ul { list-style: none; padding: 0; }
 
 /* ---------- Layout helpers ---------- */
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gut); }
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--brand); color: #fff; padding: .7rem 1.2rem;
+  border-radius: 0 0 var(--r-sm) 0; font-weight: 600;
+}
+.skip-link:focus { left: 0; }
 .section { padding-block: clamp(64px, 9vw, 120px); }
 .section--soft { background: var(--bg-soft); }
 /* Akzent-Abschnitt: dezenter Marken-Verlauf + feine Trennlinien als klarer
@@ -370,6 +377,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%,0) rotate(-45
 }
 .field textarea { resize:vertical; min-height:130px; }
 .field input:focus, .field textarea:focus { outline:none; border-color:var(--brand); background:#fff; box-shadow:0 0 0 4px rgba(79,70,229,.12); }
+.form .hp { display:none !important; } /* Honeypot gegen Spam-Bots */
 .form-check { display:flex; gap:.7rem; align-items:flex-start; font-size:.85rem; color:var(--muted); margin-bottom:1.3rem; }
 .form-check input { margin-top:.25rem; accent-color: var(--brand); flex:none; }
 .form-check a { color:var(--brand-600); text-decoration:underline; }
@@ -462,6 +470,7 @@ body.nav-open .nav-toggle span::after  { transform: translate(-50%,0) rotate(-45
   .mobile-menu {
     position: fixed; inset: 76px 0 auto 0; background:#fff; border-bottom:1px solid var(--line);
     box-shadow: var(--shadow); padding: 1.2rem var(--gut) 1.6rem; z-index:49;
+    max-height: calc(100vh - 76px); max-height: calc(100dvh - 76px); overflow-y: auto;
     transform: translateY(-12px); opacity:0; visibility:hidden; transition:.25s;
   }
   body.nav-open .mobile-menu { transform:none; opacity:1; visibility:visible; }

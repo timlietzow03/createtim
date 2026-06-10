@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
   <title>createtim · Webdesign, Wartung & SEO für lokale Betriebe | Buxtehude · Stade · Hamburg</title>
   <meta name="description" content="createtim – Tim Lietzow gestaltet, entwickelt und pflegt moderne, schnelle Websites für Unternehmen und lokale Betriebe in Buxtehude, Stade und Hamburg. Webdesign, Wartung, SEO, Hosting und individuelle Software (Tools, Automatisierung, KI &amp; Machine Learning). Jetzt kostenloses Erstgespräch sichern." />
   <meta name="author" content="Tim Lietzow" />
@@ -23,6 +24,8 @@
   <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Ohne JavaScript: Scroll-Reveal-Inhalte sofort sichtbar machen -->
+  <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 
   <!-- Structured data: local business -->
   <script type="application/ld+json">
@@ -30,7 +33,6 @@
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "createtim",
-    "image": "https://www.createtim.de/",
     "description": "Webdesign, Wartung, SEO und individuelle Softwareentwicklung (Tools, Automatisierung, KI & Machine Learning) für lokale Betriebe in Buxtehude, Stade und Hamburg.",
     "founder": "Tim Lietzow",
     "url": "https://www.createtim.de",
@@ -49,6 +51,8 @@
   </script>
 </head>
 <body>
+
+  <a class="skip-link" href="#top">Zum Inhalt springen</a>
 
   <!-- ===================== Header ===================== -->
   <header class="site-header" id="header">
@@ -72,7 +76,7 @@
           Erstgespräch
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
       </div>
     </div>
 
@@ -123,7 +127,7 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal d2">
+        <div class="hero-visual reveal d2" aria-hidden="true">
           <div class="mock">
             <div class="mock-bar">
               <i></i><i></i><i></i>
@@ -455,7 +459,9 @@
 
           <!-- Versand über Formspree (AJAX in main.js). Ohne JavaScript greift der native
                POST auf den action-Endpunkt als Fallback. -->
-          <form class="form reveal d1" id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST" novalidate>
+          <form class="form reveal d1" id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST">
+            <!-- Honeypot: für Menschen unsichtbar; füllt ein Bot das Feld, verwirft Formspree die Nachricht -->
+            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div class="field-row">
               <div class="field">
                 <label for="name">Name *</label>
@@ -499,19 +505,19 @@
 
         <div class="faq">
           <details class="faq-item reveal">
-            <summary>Was kostet eine Website?<span class="plus">+</span></summary>
+            <summary>Was kostet eine Website?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="faq-body">Das hängt vom Umfang ab – eine einfache Visitenkarten-Website ist günstiger als ein umfangreicher Auftritt mit vielen Funktionen. Im kostenlosen Erstgespräch klären wir Ihren Bedarf und Sie erhalten ein transparentes Festpreis-Angebot, bevor es losgeht.</div>
           </details>
           <details class="faq-item reveal">
-            <summary>Wie lange dauert die Umsetzung?<span class="plus">+</span></summary>
+            <summary>Wie lange dauert die Umsetzung?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="faq-body">Eine typische Website für lokale Betriebe ist je nach Umfang in etwa 2 bis 4 Wochen fertig. Den genauen Zeitrahmen stimmen wir gemeinsam ab.</div>
           </details>
           <details class="faq-item reveal">
-            <summary>Kümmern Sie sich auch um bestehende Websites?<span class="plus">+</span></summary>
+            <summary>Kümmern Sie sich auch um bestehende Websites?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="faq-body">Ja. Ich übernehme Pflege, Aktualisierung und Support bestehender Websites – inklusive Updates, Backups und Sicherheits-Checks, damit Ihre Seite zuverlässig läuft.</div>
           </details>
           <details class="faq-item reveal">
-            <summary>Für welche Region arbeiten Sie?<span class="plus">+</span></summary>
+            <summary>Für welche Region arbeiten Sie?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="faq-body">Mein Schwerpunkt liegt auf Buxtehude, Stade und Hamburg. Vieles lässt sich aber auch komplett aus der Ferne umsetzen – sprechen Sie mich einfach an.</div>
           </details>
         </div>

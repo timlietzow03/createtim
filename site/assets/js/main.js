@@ -6,29 +6,39 @@
 
   /* ---------- Header: shrink/blur on scroll ---------- */
   const header = document.getElementById("header");
+  const toTop = document.getElementById("toTop");
+  /* data-solid: Header bleibt dauerhaft im "scrolled"-Zustand (Unterseiten) */
+  const solidHeader = header && header.hasAttribute("data-solid");
   const onScroll = () => {
-    if (header) header.classList.toggle("scrolled", window.scrollY > 20);
-    const toTop = document.getElementById("toTop");
+    if (header && !solidHeader) header.classList.toggle("scrolled", window.scrollY > 20);
     if (toTop) toTop.classList.toggle("show", window.scrollY > 600);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Back to top ---------- */
+  if (toTop) {
+    toTop.addEventListener("click", () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
+  }
+
   /* ---------- Mobile menu ---------- */
   const navToggle = document.getElementById("navToggle");
   if (navToggle) {
-    const close = () => {
-      document.body.classList.remove("nav-open");
-      navToggle.setAttribute("aria-expanded", "false");
-    };
-    navToggle.addEventListener("click", () => {
-      const open = document.body.classList.toggle("nav-open");
+    const setOpen = (open) => {
+      document.body.classList.toggle("nav-open", open);
       navToggle.setAttribute("aria-expanded", String(open));
-    });
-    document.querySelectorAll("#mobileMenu a").forEach((a) =>
-      a.addEventListener("click", close)
+      navToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    };
+    navToggle.addEventListener("click", () =>
+      setOpen(!document.body.classList.contains("nav-open"))
     );
-    window.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+    document.querySelectorAll("#mobileMenu a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false))
+    );
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
   }
 
   /* ---------- Current year ---------- */
@@ -82,20 +92,34 @@
   const status = document.getElementById("formStatus");
 
   if (form) {
+    /* JS übernimmt Validierung + deutsche Meldungen; ohne JS bleibt die
+       native Browser-Validierung für den Formspree-Fallback aktiv. */
+    form.setAttribute("novalidate", "");
     const endpoint = form.getAttribute("action");
+
+    const mark = (field, invalid) => {
+      if (invalid) field.setAttribute("aria-invalid", "true");
+      else field.removeAttribute("aria-invalid");
+    };
 
     const valid = () => {
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       const message = form.message.value.trim();
       const privacy = form.privacy.checked;
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      mark(form.name, !name);
+      mark(form.email, !email || !emailOk);
+      mark(form.message, !message);
+      mark(form.privacy, !privacy);
 
       if (!name || !email || !message || !privacy) {
         status.textContent = "Bitte füllen Sie alle Pflichtfelder aus und bestätigen Sie die Datenschutzerklärung.";
         status.classList.add("err");
         return false;
       }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (!emailOk) {
         status.textContent = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
         status.classList.add("err");
         return false;
