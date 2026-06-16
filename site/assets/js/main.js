@@ -7,14 +7,52 @@
   /* ---------- Header: shrink/blur on scroll ---------- */
   const header = document.getElementById("header");
   const toTop = document.getElementById("toTop");
+  const progress = document.getElementById("scrollProgress");
   /* data-solid: Header bleibt dauerhaft im "scrolled"-Zustand (Unterseiten) */
   const solidHeader = header && header.hasAttribute("data-solid");
   const onScroll = () => {
     if (header && !solidHeader) header.classList.toggle("scrolled", window.scrollY > 20);
     if (toTop) toTop.classList.toggle("show", window.scrollY > 600);
+    if (progress) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      progress.style.transform = "scaleX(" + p + ")";
+    }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
   onScroll();
+
+  /* ---------- Scrollspy: aktiven Nav-Link markieren ---------- */
+  const navLinks = Array.prototype.slice.call(
+    document.querySelectorAll('.nav-links a[href^="#"]')
+  );
+  if (navLinks.length && "IntersectionObserver" in window) {
+    const ids = [];
+    navLinks.forEach((a) => {
+      const id = a.getAttribute("href").slice(1);
+      if (id && ids.indexOf(id) === -1) ids.push(id);
+    });
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const setActive = (id) => {
+      navLinks.forEach((a) =>
+        a.classList.toggle("is-active", a.getAttribute("href") === "#" + id)
+      );
+    };
+
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => spy.observe(s));
+  }
 
   /* ---------- Back to top ---------- */
   if (toTop) {
@@ -64,24 +102,119 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  /* ---------- Skill bars ---------- */
-  const skillList = document.getElementById("skillList");
-  if (skillList && "IntersectionObserver" in window) {
-    const fill = () =>
-      skillList.querySelectorAll(".bar i").forEach((bar) => {
-        bar.style.width = (bar.dataset.w || 0) + "%";
+  /* ---------- Skills radar: draw when in view ---------- */
+  const radar = document.getElementById("radar");
+  if (radar) {
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { radar.classList.add("in"); obs.disconnect(); }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      io.observe(radar);
+    } else {
+      radar.classList.add("in");
+    }
+  }
+
+  /* ---------- Ablauf: animated step-through timeline ---------- */
+  const psteps = Array.prototype.slice.call(document.querySelectorAll("#psteps .pstep"));
+  const plineFill = document.getElementById("plineFill");
+  if (psteps.length) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const last = psteps.length - 1;
+
+    const render = (cur) => {
+      psteps.forEach((step, i) => {
+        step.classList.toggle("done", i < cur);
+        step.classList.toggle("is-current", i === cur);
       });
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) { fill(); obs.disconnect(); }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    io.observe(skillList);
-  } else if (skillList) {
-    skillList.querySelectorAll(".bar i").forEach((b) => (b.style.width = (b.dataset.w || 0) + "%"));
+      if (plineFill) plineFill.style.setProperty("--p", last ? cur / last : 0);
+    };
+
+    /* Wachstums-Diagramm: Linie einzeichnen + wandernden Punkt starten */
+    const pgraph = document.getElementById("pgraph");
+    const pgraphMotion = document.getElementById("pgraphMotion");
+    let graphLive = false;
+    const startGraph = () => {
+      if (graphLive || !pgraph) return;
+      graphLive = true;
+      pgraph.classList.add("is-live");
+      if (pgraphMotion && typeof pgraphMotion.beginElement === "function") {
+        try { pgraphMotion.beginElement(); } catch (e) { /* SMIL nicht verfügbar */ }
+      }
+    };
+
+    if (reduce) {
+      psteps.forEach((s) => s.classList.add("done"));
+      if (plineFill) plineFill.style.setProperty("--p", 1);
+    } else {
+      let cur = 0;
+      let timer = null;
+      const tick = () => { cur = cur >= last ? 0 : cur + 1; render(cur); };
+      const start = () => { startGraph(); if (!timer) { render(0); timer = setInterval(tick, 2200); } };
+      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+      const process = document.getElementById("process");
+      if (process && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => (e.isIntersecting ? start() : stop())),
+          { threshold: 0.35 }
+        );
+        io.observe(process);
+        process.addEventListener("mouseenter", stop);
+        process.addEventListener("mouseleave", start);
+      } else {
+        start();
+      }
+    }
+  }
+
+  /* ---------- Count-up: Preise & Radar-Prozente ----------
+     Zahlen zählen beim Sichtbarwerden von 0 hoch; der Tausenderpunkt
+     (de-DE) wandert dabei sauber mit. Bei reduzierter Bewegung bleibt
+     der Endwert (aus dem HTML) einfach stehen. */
+  const counters = Array.prototype.slice.call(
+    document.querySelectorAll(".price-tag .amt, .radar-legend li b")
+  );
+  if (counters.length) {
+    const reduceCount = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const runCount = (el) => {
+      const raw = el.textContent.trim();
+      const suffix = raw.slice(-1) === "%" ? "%" : "";
+      const target = parseInt(raw.replace(/\D/g, ""), 10) || 0;
+      const dur = 900;
+      const t0 = performance.now();
+      const ease = (t) => 1 - Math.pow(1 - t, 3); /* ease-out cubic */
+      const step = (now) => {
+        const t = Math.min((now - t0) / dur, 1);
+        const val = Math.round(ease(t) * target);
+        el.textContent = val.toLocaleString("de-DE") + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    if (reduceCount || !("IntersectionObserver" in window)) {
+      /* nichts tun – Endwerte stehen bereits im HTML */
+    } else {
+      const io = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              runCount(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      counters.forEach((el) => io.observe(el));
+    }
   }
 
   /* ---------- Contact form ----------
