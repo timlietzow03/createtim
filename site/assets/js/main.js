@@ -54,6 +54,36 @@
     sections.forEach((s) => spy.observe(s));
   }
 
+  /* ---------- Saubere URL: Anker-Navigation ohne #hash ----------
+     Interne Sprungmarken scrollen per JS und schreiben den #hash NICHT
+     in die Adresszeile. Deep-Links (z. B. /#kontakt von der 404-Seite)
+     scrollen beim Laden einmal zum Ziel und werden dann bereinigt. */
+  const reduceNav = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clean = () => history.replaceState(null, "", location.pathname + location.search);
+  const goTo = (hash) => {
+    const id = (hash || "").replace(/^#/, "");
+    const target = id ? document.getElementById(id) : null;
+    const behavior = reduceNav() ? "auto" : "smooth";
+    if (!target || id === "top") window.scrollTo({ top: 0, behavior });
+    else target.scrollIntoView({ behavior, block: "start" });
+  };
+
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!link || link.classList.contains("skip-link")) return;
+    const hash = link.getAttribute("href");
+    if (!hash || hash.length < 2) return; /* leeres "#" ignorieren */
+    e.preventDefault();
+    goTo(hash);
+    clean();
+  });
+
+  /* Beim Laden mit #hash: einmal zum Ziel, dann URL säubern */
+  if (location.hash && location.hash.length > 1) {
+    const initial = location.hash;
+    requestAnimationFrame(() => { goTo(initial); clean(); });
+  }
+
   /* ---------- Back to top ---------- */
   if (toTop) {
     toTop.addEventListener("click", () => {
