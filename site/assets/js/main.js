@@ -250,9 +250,56 @@
   /* ---------- Contact form ----------
      Mit action-Endpunkt (Formspree): Versand per AJAX, ohne Seitenwechsel.
      Ohne action (oder ohne fetch): Fallback öffnet das E-Mail-Programm via mailto.
+     Mit JS wird das Formular zum Mehrschritt-Funnel (Anliegen → Zeitrahmen →
+     Kontaktdaten); ohne JS bleiben alle Schritte untereinander sichtbar.
   ------------------------------------ */
   const form = document.getElementById("contactForm");
   const status = document.getElementById("formStatus");
+
+  /* ---------- Funnel: Schrittsteuerung ---------- */
+  const fsteps = form ? Array.prototype.slice.call(form.querySelectorAll(".fstep")) : [];
+  let funnelShow = null; /* wird bei aktivem Funnel gesetzt (auch für Reset nach Versand) */
+
+  if (form && fsteps.length > 1) {
+    form.classList.add("is-funnel");
+    const bar = document.getElementById("funnelBar");
+    const label = document.getElementById("funnelLabel");
+    const backBtn = document.getElementById("funnelBack");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    let cur = 0;
+
+    funnelShow = (i, focus) => {
+      cur = Math.max(0, Math.min(i, fsteps.length - 1));
+      fsteps.forEach((s, j) => s.classList.toggle("is-active", j === cur));
+      if (bar) bar.style.setProperty("--p", (cur + 1) / fsteps.length);
+      if (label) label.textContent = "Schritt " + (cur + 1) + " von " + fsteps.length;
+      if (backBtn) backBtn.hidden = cur === 0;
+      if (submitBtn) submitBtn.hidden = cur !== fsteps.length - 1;
+      if (focus) {
+        const f = fsteps[cur].querySelector("input, textarea");
+        if (f) f.focus({ preventScroll: true });
+      }
+    };
+
+    if (backBtn) backBtn.addEventListener("click", () => funnelShow(cur - 1, false));
+
+    /* Auswahl-Schritte: nach Klick auf eine Option kurz den gewählten Zustand
+       zeigen, dann automatisch weiter. Erneuter Klick auf die bereits gewählte
+       Option (z. B. nach "Zurück") führt ebenfalls weiter. */
+    fsteps.forEach((step, i) => {
+      if (i === fsteps.length - 1) return; /* letzter Schritt: normale Felder */
+      step.querySelectorAll(".opt-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          setTimeout(() => {
+            const input = card.querySelector("input");
+            if (input && input.checked && cur === i) funnelShow(i + 1, true);
+          }, 220);
+        });
+      });
+    });
+
+    funnelShow(0, false);
+  }
 
   if (form) {
     /* JS übernimmt Validierung + deutsche Meldungen; ohne JS bleibt die
@@ -295,6 +342,17 @@
       status.className = "form-status";
       if (!valid()) return;
 
+      /* Funnel-Auswahl auslesen (kann leer sein, z. B. beim No-JS-Fallback nie) */
+      const anliegenEl = form.querySelector('input[name="anliegen"]:checked');
+      const zeitEl = form.querySelector('input[name="zeitrahmen"]:checked');
+      const anliegen = anliegenEl ? anliegenEl.value : "";
+      const zeitrahmen = zeitEl ? zeitEl.value : "";
+      const betreff = anliegen ? "Anfrage: " + anliegen : "Anfrage über createtim.de";
+
+      /* E-Mail-Betreff bei Formspree aus der Auswahl setzen */
+      const subj = form.querySelector('input[name="_subject"]');
+      if (subj) subj.value = betreff;
+
       /* ----- Formspree (AJAX) ----- */
       if (endpoint && "fetch" in window) {
         const btn = form.querySelector("button[type=submit]");
@@ -311,6 +369,7 @@
               status.textContent = "Vielen Dank! Ihre Nachricht wurde gesendet – ich melde mich i. d. R. innerhalb von 24 Stunden bei Ihnen.";
               status.classList.add("ok");
               form.reset();
+              if (funnelShow) funnelShow(0, false);
               return;
             }
             return res.json().then((data) => {
@@ -330,12 +389,11 @@
       }
 
       /* ----- Fallback: mailto ----- */
-      const subject = form.subject.value.trim();
-      const betreff = subject ? subject : "Anfrage über createtim.de";
       const body =
         "Name: " + form.name.value.trim() + "\n" +
         "E-Mail: " + form.email.value.trim() + "\n" +
-        (subject ? "Betreff: " + subject + "\n" : "") +
+        (anliegen ? "Anliegen: " + anliegen + "\n" : "") +
+        (zeitrahmen ? "Zeitrahmen: " + zeitrahmen + "\n" : "") +
         "\n" + form.message.value.trim() + "\n";
 
       window.location.href =
@@ -346,6 +404,7 @@
       status.textContent = "Danke! Ihr E-Mail-Programm öffnet sich – bitte senden Sie die Nachricht ab. Alternativ erreichen Sie mich direkt unter tim.lietzow@createtim.de.";
       status.classList.add("ok");
       form.reset();
+      if (funnelShow) funnelShow(0, false);
     });
   }
 })();

@@ -574,8 +574,56 @@
       </div>
     </section>
 
+    <!-- ===================== Baukasten-Vergleich ===================== -->
+    <section class="section" id="vergleich">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow eyebrow--center">vergleich</span>
+          <h2>Baukasten oder <span class="gradient-text">individuelle Website?</span></h2>
+          <p>Wix, Jimdo &amp; Co. versprechen die eigene Website in Minuten – und für den allerersten Eindruck reicht das auch. Wer aber über Google gefunden werden und aus Besuchern Kunden machen will, stößt schnell an Grenzen.</p>
+        </div>
+
+        <div class="compare reveal d1">
+          <div class="compare-card">
+            <h3>Website-Baukasten</h3>
+            <p class="compare-sub">Wix, Jimdo, Onepage &amp; Co.</p>
+            <ul>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Schnell gestartet, geringe Anfangskosten</li>
+              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Vorlagen-Look – sieht aus wie tausend andere Seiten</li>
+              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Viel unnötiger Code – langsamer und damit schlechter für Google</li>
+              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>SEO nur an der Oberfläche steuerbar</li>
+              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Laufende Gebühren &amp; Anbieter-Bindung – ein Umzug ist kaum möglich</li>
+              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Bei Fragen: anonymer Support statt fester Ansprechpartner</li>
+            </ul>
+          </div>
+
+          <div class="compare-card compare-card--featured">
+            <span class="compare-flag">Mein Ansatz</span>
+            <h3>Individuell von createtim</h3>
+            <p class="compare-sub">Handgemacht für Ihren Betrieb</p>
+            <ul>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Einzigartiges Design, das zu Ihrem Betrieb passt</li>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Handgeschriebener, schlanker Code – Bestwerte bei Ladezeit &amp; PageSpeed</li>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>SEO von Grund auf: saubere Struktur, lokale Suche, strukturierte Daten</li>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Ihre Website gehört Ihnen – kein Lock-in, freier Hosting-Wechsel</li>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Persönlicher Ansprechpartner aus der Region</li>
+              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Wächst mit: von der Visitenkarte bis zur individuellen Software</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="compare-cta reveal d2">
+          <p>Kurz gesagt: Ein Baukasten ist zur Miete, eine individuelle Website ist Eigentum – und auf lange Sicht meist die günstigere und sichtbarere Lösung.</p>
+          <a href="#kontakt" class="btn btn--primary btn--lg">
+            Unverbindlich beraten lassen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== Kontakt ===================== -->
-    <section class="section" id="kontakt">
+    <section class="section section--soft" id="kontakt">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow eyebrow--center">Kontakt</span>
@@ -603,37 +651,99 @@
             </div>
           </div>
 
-          <!-- Versand über Formspree (AJAX in main.js). Ohne JavaScript greift der native
-               POST auf den action-Endpunkt als Fallback. -->
+          <!-- Versand über Formspree (AJAX in main.js). Mit JavaScript wird das Formular
+               zum Mehrschritt-Funnel; ohne JavaScript sind alle Schritte untereinander
+               sichtbar und der native POST auf den action-Endpunkt greift als Fallback. -->
           <form class="form reveal d1" id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST">
             <!-- Honeypot: für Menschen unsichtbar; füllt ein Bot das Feld, verwirft Formspree die Nachricht -->
             <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="field-row">
-              <div class="field">
-                <label for="name">Name *</label>
-                <input type="text" id="name" name="name" autocomplete="name" required placeholder="Max Mustermann" />
+            <input type="hidden" name="_subject" value="Anfrage über createtim.de" />
+
+            <!-- Fortschrittsanzeige (nur im Funnel-Modus sichtbar) -->
+            <div class="funnel-head">
+              <span class="fstep-label" id="funnelLabel">Schritt 1 von 3</span>
+              <span class="funnel-bar" aria-hidden="true"><i id="funnelBar"></i></span>
+            </div>
+
+            <fieldset class="fstep">
+              <legend>Was kann ich für Sie tun?</legend>
+              <div class="opt-grid">
+                <label class="opt-card">
+                  <input type="radio" name="anliegen" value="Neue Website" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+                  <span class="opt-txt"><b>Neue Website</b><small>Von der Idee bis online</small></span>
+                </label>
+                <label class="opt-card">
+                  <input type="radio" name="anliegen" value="Wartung &amp; Betreuung" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l6-6a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></span>
+                  <span class="opt-txt"><b>Wartung &amp; Betreuung</b><small>Bestehende Seite pflegen</small></span>
+                </label>
+                <label class="opt-card">
+                  <input type="radio" name="anliegen" value="Software &amp; Automatisierung" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></span>
+                  <span class="opt-txt"><b>Software &amp; Automatisierung</b><small>Tools, KI &amp; individuelle Lösungen</small></span>
+                </label>
+                <label class="opt-card">
+                  <input type="radio" name="anliegen" value="Etwas anderes" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                  <span class="opt-txt"><b>Etwas anderes</b><small>Einfach kurz beschreiben</small></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="fstep">
+              <legend>Wann soll es losgehen?</legend>
+              <div class="opt-grid">
+                <label class="opt-card">
+                  <input type="radio" name="zeitrahmen" value="So bald wie möglich" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+                  <span class="opt-txt"><b>So bald wie möglich</b><small>Am liebsten direkt starten</small></span>
+                </label>
+                <label class="opt-card">
+                  <input type="radio" name="zeitrahmen" value="In den nächsten 3 Monaten" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+                  <span class="opt-txt"><b>In den nächsten Monaten</b><small>Geplant, aber kein Zeitdruck</small></span>
+                </label>
+                <label class="opt-card">
+                  <input type="radio" name="zeitrahmen" value="Noch offen" />
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+                  <span class="opt-txt"><b>Noch offen</b><small>Erst mal unverbindlich informieren</small></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="fstep">
+              <legend>Wie erreiche ich Sie?</legend>
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required placeholder="Max Mustermann" />
+                </div>
+                <div class="field">
+                  <label for="email">E-Mail *</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required placeholder="max@firma.de" />
+                </div>
               </div>
               <div class="field">
-                <label for="email">E-Mail *</label>
-                <input type="email" id="email" name="email" autocomplete="email" required placeholder="max@firma.de" />
+                <label for="message">Ihre Nachricht *</label>
+                <textarea id="message" name="message" required placeholder="Erzählen Sie mir kurz von Ihrem Projekt …"></textarea>
               </div>
+              <label class="form-check">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden. *</span>
+              </label>
+            </fieldset>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn--back" id="funnelBack" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Zurück
+              </button>
+              <button type="submit" class="btn btn--primary btn--lg">
+                Nachricht senden
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
             </div>
-            <div class="field">
-              <label for="subject">Worum geht es?</label>
-              <input type="text" id="subject" name="subject" placeholder="z. B. Neue Website für mein Café" />
-            </div>
-            <div class="field">
-              <label for="message">Ihre Nachricht *</label>
-              <textarea id="message" name="message" required placeholder="Erzählen Sie mir kurz von Ihrem Projekt …"></textarea>
-            </div>
-            <label class="form-check">
-              <input type="checkbox" id="privacy" name="privacy" required />
-              <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden. *</span>
-            </label>
-            <button type="submit" class="btn btn--primary btn--lg">
-              Nachricht senden
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            </button>
             <div class="form-status" id="formStatus" role="status"></div>
             <p class="form-note">* Pflichtfelder. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.</p>
           </form>
@@ -653,6 +763,10 @@
           <details class="faq-item reveal">
             <summary>Was kostet eine Website?<span class="plus" aria-hidden="true">+</span></summary>
             <div class="faq-body">Das hängt vom Umfang ab – eine einfache Visitenkarten-Website ist günstiger als ein umfangreicher Auftritt mit vielen Funktionen. Im kostenlosen Erstgespräch klären wir Ihren Bedarf und Sie erhalten ein transparentes Festpreis-Angebot, bevor es losgeht.</div>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Warum nicht einfach ein Baukasten wie Wix oder Jimdo?<span class="plus" aria-hidden="true">+</span></summary>
+            <div class="faq-body">Für einen schnellen ersten Auftritt sind Baukästen in Ordnung. Sie stoßen aber an Grenzen, sobald es um Sichtbarkeit bei Google, Ladezeit und einen eigenständigen Auftritt geht – und die monatlichen Gebühren laufen dauerhaft weiter, während die Seite dem Anbieter gehört. Eine individuelle Website ist Ihr Eigentum, lässt sich frei erweitern und ist auf lange Sicht meist die günstigere Lösung. Mehr dazu im <a href="#vergleich">Vergleich weiter oben</a>.</div>
           </details>
           <details class="faq-item reveal">
             <summary>Wie lange dauert die Umsetzung?<span class="plus" aria-hidden="true">+</span></summary>
