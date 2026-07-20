@@ -11,21 +11,3 @@ desktop.ini
 *.log
 *.tmp
 .cache/
-
-# Node (only if a build step is ever added — none today)
-node_modules/
-dist/
-
-# Local Claude Code settings (keep shared config, ignore personal)
-.claude/settings.local.json
-
-# Source / reference files that live at the repo root but are NOT part of
-# the published site/ folder — kept locally only, never tracked or served.
-/createtim.pdf
-/tim-visitenkarte.pdf
-/tim-portfolio.html
-
-# Lighthouse audit reports (local build artifacts, not part of the site)
-/lighthouse-*.report.html
-/lighthouse-*.json
-/lh*.json
