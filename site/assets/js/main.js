@@ -1,95 +1,383 @@
 /* =================================================================
-   createtim — main.js
+   createtim — main.js (sakura edition + i18n)
    ================================================================= */
 (function () {
   "use strict";
 
-  /* ---------- Header: shrink/blur on scroll ---------- */
-  const header = document.getElementById("header");
-  const toTop = document.getElementById("toTop");
-  const progress = document.getElementById("scrollProgress");
-  /* data-solid: Header bleibt dauerhaft im "scrolled"-Zustand (Unterseiten) */
-  const solidHeader = header && header.hasAttribute("data-solid");
-  const onScroll = () => {
-    if (header && !solidHeader) header.classList.toggle("scrolled", window.scrollY > 20);
-    if (toTop) toTop.classList.toggle("show", window.scrollY > 600);
-    if (progress) {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-      progress.style.transform = "scaleX(" + p + ")";
+  /* ---------- Password Gate ---------- */
+  const AUTH_KEY = "createtim-auth";
+  const PW = "Nemo";
+
+  function checkAuth() {
+    try { return localStorage.getItem(AUTH_KEY) === PW; } catch(e) {}
+    return false;
+  }
+
+  function unlock() {
+    const gate = document.getElementById("pwGate");
+    if (gate) gate.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  /* If already authenticated, unlock immediately */
+  if (checkAuth()) {
+    unlock();
+  } else {
+    /* Block scroll while gate is visible */
+    document.body.style.overflow = "hidden";
+
+    /* Wire up the password form */
+    const pwForm = document.getElementById("pwForm");
+    const pwInput = document.getElementById("pwInput");
+    const pwErr = document.getElementById("pwErr");
+
+    if (pwForm) {
+      pwForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const val = pwInput.value.trim();
+        if (val === PW) {
+          localStorage.setItem(AUTH_KEY, val);
+          unlock();
+        } else {
+          pwErr.classList.add("show");
+          pwInput.value = "";
+          pwInput.focus();
+        }
+      });
     }
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-  onScroll();
-
-  /* ---------- Scrollspy: aktiven Nav-Link markieren ---------- */
-  const navLinks = Array.prototype.slice.call(
-    document.querySelectorAll('.nav-links a[href^="#"]')
-  );
-  if (navLinks.length && "IntersectionObserver" in window) {
-    const ids = [];
-    navLinks.forEach((a) => {
-      const id = a.getAttribute("href").slice(1);
-      if (id && ids.indexOf(id) === -1) ids.push(id);
-    });
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-
-    const setActive = (id) => {
-      navLinks.forEach((a) =>
-        a.classList.toggle("is-active", a.getAttribute("href") === "#" + id)
-      );
-    };
-
-    const spy = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
-    );
-    sections.forEach((s) => spy.observe(s));
   }
 
-  /* ---------- Saubere URL: Anker-Navigation ohne #hash ----------
-     Interne Sprungmarken scrollen per JS und schreiben den #hash NICHT
-     in die Adresszeile. Deep-Links (z. B. /#kontakt von der 404-Seite)
-     scrollen beim Laden einmal zum Ziel und werden dann bereinigt. */
-  const reduceNav = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const clean = () => history.replaceState(null, "", location.pathname + location.search);
-  const goTo = (hash) => {
-    const id = (hash || "").replace(/^#/, "");
-    const target = id ? document.getElementById(id) : null;
-    const behavior = reduceNav() ? "auto" : "smooth";
-    if (!target || id === "top") window.scrollTo({ top: 0, behavior });
-    else target.scrollIntoView({ behavior, block: "start" });
+  /* ---------- Translations ---------- */
+  const T = {
+    de: {
+      skip: "Zum Inhalt springen",
+      navLeistungen: "Leistungen",
+      navAnwendungen: "Anwendungen",
+      navUeberMich: "Über mich",
+      navKontakt: "Kontakt",
+      menuOpen: "Menü öffnen",
+      menuClose: "Menü schließen",
+
+      heroLead: "Data Science, Software und Webdesign aus Buxtehude. Ich helfe lokalen Betrieben, ihre Probleme mit Technik zu lösen.",
+      sectionWasIchMache: "Was ich mache",
+      serviceDS: "Data Science & Analyse",
+      serviceDSDesc: "Aus Daten Erkenntnisse gewinnen — Auswertungen, Prognosen, Dashboards. Damit Sie fundiert entscheiden können.",
+      serviceAuto: "Automatisierung",
+      serviceAutoDesc: "Wiederkehrende Aufgaben per Skript erledigen. Daten zusammenführen, Berichte erzeugen, Systeme verbinden.",
+      serviceWeb: "Webdesign",
+      serviceWebDesc: "Websites, die aussehen wie Sie wollen und funktionieren wie sie sollen. Responsive, schnell, suchmaschinenfreundlich.",
+      aboutP1: "Ich bin Dualer Student Informatik und ausgelernter Anwendungsentwickler. Data Science ist mein Hauptfeld — aber wenn Sie eine Website brauchen, baue ich die auch.",
+      aboutP2: "KI nutze ich als Werkzeug, nicht als Verkaufsversprechen. Weil ich die richtigen Fragen stellen kann.",
+
+      dashBuxtehude: "Buxtehude",
+      dashLokal: "lokal",
+      dashGerade: "Gerade",
+      dashGeradeVal: "Data Science",
+      dashGeradeSub: "Projekt für lokalen Betrieb",
+      repos: "Repos",
+
+      aboutEyebrow: "Über mich",
+      aboutH2: "Hallo, ich bin Tim.",
+      aboutP3: "Ich komme aus Buxtehude und kenne die Region. Ich weiß, was lokale Betriebe brauchen — keinen anonymen Dienstleister, sondern jemanden, der direkt vor Ort ist und die Sprache spricht.",
+      aboutP4: "Mein Schwerpunkt liegt auf Data Science und Softwareentwicklung. Aber ich baue auch gerne Websites, wenn's sinnvoll ist. Hauptsache, das Ergebnis funktioniert.",
+      aboutEmail: "E-Mail",
+      aboutTel: "Telefon",
+
+      sectionKontakt: "Kontakt",
+      kontaktH2: "Lassen Sie uns sprechen.",
+      kontaktP: "Schreiben Sie mir kurz, worum es geht. Ich melde mich zeitnah.",
+      kontaktDtEmail: "E-Mail",
+      KontaktDtTel: "Telefon",
+      kontaktDtAdresse: "Adresse",
+      kontaktAdresse: "Hauptstraße 9, 21614 Buxtehude",
+      formName: "Name",
+      formEmail: "E-Mail",
+      formNachricht: "Nachricht",
+      formNamePh: "Max Mustermann",
+      formEmailPh: "max@firma.de",
+      formMsgPh: "Worum geht es?",
+      formPrivacy: "Datenschutzerklärung gelesen, Verarbeitung ok. *",
+      formSubmit: "Nachricht senden",
+      formSending: "Wird gesendet …",
+      formOk: "Gesendet. Ich melde mich i.d.R. innerhalb 24h.",
+      formErr: "Fehlgeschlagen. E-Mail an tim.lietzow@createtim.de.",
+      formErrFields: "Alle Felder ausfüllen + Datenschutz bestätigen.",
+      formErrEmail: "Ungültige E-Mail-Adresse.",
+      formNote: "* Pflichtfelder. Daten nur zur Bearbeitung Ihrer Anfrage.",
+      formMailto: "E-Mail-Programm öffnet sich. Alternativ: tim.lietzow@createtim.de",
+
+      footerImpressum: "Impressum",
+      footerDatenschutz: "Datenschutz",
+      backToTop: "Nach oben scrollen",
+
+      galleryLabel: "Einblicke",
+      galleryH2: "Tim & Buxtehude",
+      gallery1Title: "Am Schreibtisch",
+      gallery1Desc: "So sieht ein typischer Arbeitstag aus — Daten analysieren, Code schreiben, Kaffee trinken.",
+      gallery2Title: "Buxtehude",
+      gallery2Desc: "Meine Heimat. Die Stadt, für die ich gerne arbeite.",
+      gallery3Title: "Kirschblüten",
+      gallery3Desc: "Der Grund, warum ich diese Seite so gestaltet habe.",
+      gallery4Title: "Zeile für Zeile",
+      gallery4Desc: "Jedes Projekt beginnt mit der ersten Zeile Code.",
+      gallery5Title: "Vor Ort",
+      gallery5Desc: "Persönlich, nicht anonym. Direkt aus der Nachbarschaft.",
+      gallery6Title: "Im Gespräch",
+      gallery6Desc: "Zuhören ist wichtiger als programmieren.",
+
+      /* leistungen.html */
+      leistungenEyebrow: "Leistungen",
+      leistungenH1: "Was ich anbiete",
+      leistungenLead: "Klare Leistungen, faire Preise. Kein Agentur-Aufschlag.",
+      leiWeb: "Webdesign",
+      leiWebDesc: "Modernes, individuelles Design, das zu Ihrer Marke passt. Responsive, schnell und suchmaschinenfreundlich — nicht von der Stange.",
+      leiWartung: "Wartung & Support",
+      leiWartungDesc: "Updates, Backups, Sicherheit und kleine Änderungen — ich halte Ihre Website dauerhaft aktuell und stabil.",
+      leiSEO: "SEO & Sichtbarkeit",
+      leiSEODesc: "Damit Kunden Sie bei Google finden: saubere Technik, sinnvolle Keywords und lokale Suchmaschinenoptimierung.",
+      leiHosting: "Hosting & Einrichtung",
+      leiHostingDesc: "Domain, E-Mail und Hosting — ich richte alles ein, damit Ihre Seite zuverlässig online geht.",
+      sectionPreise: "Preise",
+      preisPaket: "Leistung",
+      preisPreis: "Preis",
+      preisUmfang: "Umfang",
+      preisWebsites: "Websites",
+      preisWebsitesUmfang: "Onepager bis mehrseitig, Kontaktformular, responsiv, SEO-Grundlagen",
+      preisAnwendungen: "Anwendungen & Automatisierung",
+      preisAnwendungenUmfang: "Individuelle Tools, Skripte, Schnittstellen — Preis hängt vom Projekt ab",
+      preisWartung: "Wartung",
+      preisWartungUmfang: "Updates, Backups, Sicherheit",
+      preisNote: "Gemäß § 19 UStG keine Umsatzsteuer. Alle Preise Endpreise.",
+
+      /* anwendungen.html */
+      anwEyebrow: "Anwendungen",
+      anwH1: "Data Science, KI & Automatisierung",
+      anwLead: "Mein eigentliches Feld. Ich löse Probleme mit Code — von der Datenanalyse bis zur individuellen Software.",
+      anwDS: "Data Science & Analyse",
+      anwDSDesc: "Aus Ihren Daten Erkenntnisse gewinnen. Auswertungen, Prognosen und Dashboards — damit Sie fundiert entscheiden können.",
+      anwML: "Machine Learning",
+      anwMLDesc: "Modelle, die Muster erkennen und Vorhersagen treffen. Von Klassifikation bis zu empfehlungsbasierten Systemen.",
+      anwKI: "KI-Lösungen",
+      anwKIDesc: "Praktische KI-Anwendungen — nicht das, was alle versprechen, sondern das, was Ihr Problem löst. Ehrlich eingesetzt.",
+      anwAuto: "Automatisierung & Skripte",
+      anwAutoDesc: "Wiederkehrende Aufgaben erledige ich per Python-Skript automatisch: Daten zusammenführen, Berichte erzeugen, Systeme verbinden.",
+      anwTools: "Individuelle Tools",
+      anwToolsDesc: "Maßgeschneiderte kleine Programme statt umständlicher Excel-Listen: Angebots-Generatoren, interne Tools, Verwaltungssysteme.",
+      anwAPIs: "Schnittstellen & APIs",
+      anwAPIDesc: "Ich verbinde Ihre vorhandenen Programme und Dienste, damit Daten automatisch dorthin fließen, wo Sie sie brauchen.",
+      anwGitHub: "Einblicke in meine Arbeit:",
+
+      /* ueber-mich.html */
+      ubmEyebrow: "Über mich",
+      ubmH1: "Tim Lietzow",
+      ubmWerH2: "Wer ich bin",
+      ubmWer: "Ich bin Tim, aus Buxtehude. Ich studiere Informatik im dualen Modell und habe meine Ausbildung zum Fachinformatiker für Anwendungsentwicklung schon in der Tasche.",
+      ubmWasH2: "Was ich mache",
+      ubmWas1: "Data Science ist mein Hauptfeld. Ich analysiere Daten, baue Modelle, automatisiere Abläufe. KI nutze ich dabei als Werkzeug — weil ich die richtigen Fragen stellen kann, nicht weil ich sonst nichts kann.",
+      ubmWas2: "Webdesign mache ich, weil ich gerne Dinge baue, die funktionieren. Wenn ein lokaler Betrieb eine Website braucht, helfe ich gern. Aber mein Schwerpunkt liegt auf Anwendungen und Software.",
+      ubmWarumH2: "Warum Buxtehude?",
+      ubmWarum: "Ich kenne die Region, spreche Ihre Sprache und weiß, was lokale Betriebe brauchen. Keine anonyme Hotline, sondern ein fester Ansprechpartner aus der Nachbarschaft.",
+      ubmAntH2: "Was mich antreibt",
+      ubmAnt: "Etwas zu bauen, das funktioniert. Keine coolen Demos, sondern Lösungen, die im Alltag helfen. Dazu lerne ich ständig dazu — Technik verändert sich schnell, und ich verändere mich mit.",
+
+      /* kontakt.html */
+      ktEyebrow: "Kontakt",
+      ktH1: "Schreiben Sie mir",
+      ktLead: "Schreiben Sie mir kurz, worum es geht — ich melde mich zeitnah.",
+      ktTel: "Telefon",
+      ktEmail: "E-Mail",
+      ktAdresse: "Adresse",
+      ktAdresseVal: "Hauptstraße 9<br/>21614 Buxtehude",
+      ktErreich: "Erreichbarkeit",
+      ktErreichVal: "Mo–Fr, Antwort i.d.R. innerhalb 24h",
+    },
+
+    en: {
+      skip: "Skip to content",
+      navLeistungen: "Services",
+      navAnwendungen: "Applications",
+      navUeberMich: "About",
+      navKontakt: "Contact",
+      menuOpen: "Open menu",
+      menuClose: "Close menu",
+
+      heroLead: "Data science, software and web design from Buxtehude. I help local businesses solve their tech problems.",
+      sectionWasIchMache: "What I do",
+      serviceDS: "Data Science & Analytics",
+      serviceDSDesc: "Turning data into insights — reports, forecasts, dashboards. So you can make informed decisions.",
+      serviceAuto: "Automation",
+      serviceAutoDesc: "Automating repetitive tasks with scripts. Merging data, generating reports, connecting systems.",
+      serviceWeb: "Web Design",
+      serviceWebDesc: "Websites that look how you want and work how they should. Responsive, fast, SEO-friendly.",
+      aboutP1: "I'm a dual student in computer science and a qualified application developer. Data science is my main focus — but if you need a website, I'll build that too.",
+      aboutP2: "I use AI as a tool, not a sales pitch. Because I know the right questions to ask.",
+
+      dashBuxtehude: "Buxtehude",
+      dashLokal: "local",
+      dashGerade: "Currently",
+      dashGeradeVal: "Data Science",
+      dashGeradeSub: "Project for a local business",
+      repos: "repos",
+
+      aboutEyebrow: "About me",
+      aboutH2: "Hi, I'm Tim.",
+      aboutP3: "I'm from Buxtehude and know the region. I know what local businesses need — not an anonymous service provider, but someone who's right there and speaks your language.",
+      aboutP4: "My focus is on data science and software development. But I also enjoy building websites when it makes sense. The important thing is that it works.",
+      aboutEmail: "Email",
+      aboutTel: "Phone",
+
+      sectionKontakt: "Contact",
+      kontaktH2: "Let's talk.",
+      kontaktP: "Drop me a message about what you need. I'll get back to you promptly.",
+      kontaktDtEmail: "Email",
+      KontaktDtTel: "Phone",
+      kontaktDtAdresse: "Address",
+      kontaktAdresse: "Hauptstraße 9, 21614 Buxtehude, Germany",
+      formName: "Name",
+      formEmail: "Email",
+      formNachricht: "Message",
+      formNamePh: "John Doe",
+      formEmailPh: "john@company.com",
+      formMsgPh: "What's this about?",
+      formPrivacy: "I've read the privacy policy and agree to data processing. *",
+      formSubmit: "Send message",
+      formSending: "Sending …",
+      formOk: "Sent. I'll get back to you within 24h.",
+      formErr: "Failed. Email tim.lietzow@createtim.de directly.",
+      formErrFields: "Please fill all fields and confirm privacy policy.",
+      formErrEmail: "Invalid email address.",
+      formNote: "* Required fields. Data used only to process your request.",
+      formMailto: "Opening email client. Alternatively: tim.lietzow@createtim.de",
+
+      footerImpressum: "Legal",
+      footerDatenschutz: "Privacy",
+      backToTop: "Scroll to top",
+
+      galleryLabel: "Glimpses",
+      galleryH2: "Tim & Buxtehude",
+      gallery1Title: "At my desk",
+      gallery1Desc: "A typical workday — analysing data, writing code, drinking coffee.",
+      gallery2Title: "Buxtehude",
+      gallery2Desc: "My hometown. The place I enjoy working for.",
+      gallery3Title: "Cherry blossoms",
+      gallery3Desc: "The reason this website looks the way it does.",
+      gallery4Title: "Line by line",
+      gallery4Desc: "Every project starts with the first line of code.",
+      gallery5Title: "On site",
+      gallery5Desc: "Personal, not anonymous. Right from your neighbourhood.",
+      gallery6Title: "In conversation",
+      gallery6Desc: "Listening is more important than coding.",
+
+      /* leistungen.html */
+      leistungenEyebrow: "Services",
+      leistungenH1: "What I offer",
+      leistungenLead: "Clear services, fair prices. No agency markup.",
+      leiWeb: "Web Design",
+      leiWebDesc: "Modern, custom design that matches your brand. Responsive, fast and SEO-friendly — not off the shelf.",
+      leiWartung: "Maintenance & Support",
+      leiWartungDesc: "Updates, backups, security and small changes — I keep your website up to date and stable.",
+      leiSEO: "SEO & Visibility",
+      leiSEODesc: "So customers find you on Google: clean code, relevant keywords and local search optimisation.",
+      leiHosting: "Hosting & Setup",
+      leiHostingDesc: "Domain, email and hosting — I set everything up so your site goes live reliably.",
+      sectionPreise: "Pricing",
+      preisPaket: "Service",
+      preisPreis: "Price",
+      preisUmfang: "Scope",
+      preisWebsites: "Websites",
+      preisWebsitesUmfang: "Landing page to multi-page, contact form, responsive, SEO basics",
+      preisAnwendungen: "Applications & Automation",
+      preisAnwendungenUmfang: "Custom tools, scripts, interfaces — price depends on the project",
+      preisWartung: "Maintenance",
+      preisWartungUmfang: "Updates, backups, security",
+      preisNote: "No VAT per § 19 UStG. All prices final.",
+
+      /* anwendungen.html */
+      anwEyebrow: "Applications",
+      anwH1: "Data Science, AI & Automation",
+      anwLead: "My core field. I solve problems with code — from data analysis to custom software.",
+      anwDS: "Data Science & Analytics",
+      anwDSDesc: "Gaining insights from your data. Reports, forecasts and dashboards — so you can make informed decisions.",
+      anwML: "Machine Learning",
+      anwMLDesc: "Models that recognise patterns and make predictions. From classification to recommendation systems.",
+      anwKI: "AI Solutions",
+      anwKIDesc: "Practical AI applications — not what everyone promises, but what actually solves your problem. Used honestly.",
+      anwAuto: "Automation & Scripts",
+      anwAutoDesc: "I automate repetitive tasks with Python scripts: merging data, generating reports, connecting systems.",
+      anwTools: "Custom Tools",
+      anwToolsDesc: "Tailored little programs instead of clunky Excel sheets: quote generators, internal tools, management systems.",
+      anwAPIs: "Interfaces & APIs",
+      anwAPIDesc: "I connect your existing programmes and services so data flows automatically to where you need it.",
+      anwGitHub: "Insights into my work:",
+
+      /* ueber-mich.html */
+      ubmEyebrow: "About me",
+      ubmH1: "Tim Lietzow",
+      ubmWerH2: "Who I am",
+      ubmWer: "I'm Tim, from Buxtehude. I study computer science on a dual programme and have already completed my training as an application developer.",
+      ubmWasH2: "What I do",
+      ubmWas1: "Data science is my main field. I analyse data, build models, automate workflows. I use AI as a tool — because I know the right questions to ask, not because I can't do anything else.",
+      ubmWas2: "I do web design because I enjoy building things that work. When a local business needs a website, I'm happy to help. But my focus is on applications and software.",
+      ubmWarumH2: "Why Buxtehude?",
+      ubmWarum: "I know the region, speak your language and know what local businesses need. No anonymous hotline, but a dedicated contact person from your neighbourhood.",
+      ubmAntH2: "What drives me",
+      ubmAnt: "Building something that works. No cool demos, but solutions that help in everyday life. I'm always learning — technology changes fast, and I change with it.",
+
+      /* kontakt.html */
+      ktEyebrow: "Contact",
+      ktH1: "Get in touch",
+      ktLead: "Drop me a message about what you need — I'll get back to you promptly.",
+      ktTel: "Phone",
+      ktEmail: "Email",
+      ktAdresse: "Address",
+      ktAdresseVal: "Hauptstraße 9<br/>21614 Buxtehude, Germany",
+      ktErreich: "Availability",
+      ktErreichVal: "Mon–Fri, usually within 24h",
+    },
   };
 
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest ? e.target.closest('a[href^="#"]') : null;
-    if (!link || link.classList.contains("skip-link")) return;
-    const hash = link.getAttribute("href");
-    if (!hash || hash.length < 2) return; /* leeres "#" ignorieren */
-    e.preventDefault();
-    goTo(hash);
-    clean();
-  });
+  let currentLang = localStorage.getItem("createtim-lang") || "de";
 
-  /* Beim Laden mit #hash: einmal zum Ziel, dann URL säubern */
-  if (location.hash && location.hash.length > 1) {
-    const initial = location.hash;
-    requestAnimationFrame(() => { goTo(initial); clean(); });
-  }
+  /* ---------- Apply translations ---------- */
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem("createtim-lang", lang);
+    document.documentElement.lang = lang;
 
-  /* ---------- Back to top ---------- */
-  if (toTop) {
-    toTop.addEventListener("click", () => {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    const dict = T[lang] || T.de;
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) {
+        el.textContent = dict[key];
+      }
     });
+
+    /* Handle innerHTML translations (for elements with <br> etc.) */
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-html");
+      if (dict[key] !== undefined) {
+        el.innerHTML = dict[key];
+      }
+    });
+
+    /* Handle placeholders */
+    document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-ph");
+      if (dict[key] !== undefined) {
+        el.placeholder = dict[key];
+      }
+    });
+
+    /* Update lang toggle button text */
+    const langLabel = document.getElementById("langLabel");
+    if (langLabel) langLabel.textContent = lang.toUpperCase();
+
+    /* Update form validation messages */
+    const errFields = document.getElementById("formStatus");
+    if (errFields && errFields.classList.contains("err") && errFields.dataset.i18n) {
+      /* will be re-set by validation */
+    }
   }
 
   /* ---------- Mobile menu ---------- */
@@ -98,7 +386,7 @@
     const setOpen = (open) => {
       document.body.classList.toggle("nav-open", open);
       navToggle.setAttribute("aria-expanded", String(open));
-      navToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+      navToggle.setAttribute("aria-label", open ? T[currentLang].menuClose : T[currentLang].menuOpen);
     };
     navToggle.addEventListener("click", () =>
       setOpen(!document.body.classList.contains("nav-open"))
@@ -108,6 +396,18 @@
     );
     window.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
   }
+
+  /* ---------- Language toggle ---------- */
+  const langToggle = document.getElementById("langToggle");
+  if (langToggle) {
+    langToggle.addEventListener("click", () => {
+      const next = currentLang === "de" ? "en" : "de";
+      applyLang(next);
+    });
+  }
+
+  /* Apply saved language on load */
+  applyLang(currentLang);
 
   /* ---------- Current year ---------- */
   const year = document.getElementById("year");
@@ -125,185 +425,84 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
     );
     reveals.forEach((el) => io.observe(el));
   } else {
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  /* ---------- Skills radar: draw when in view ---------- */
-  const radar = document.getElementById("radar");
-  if (radar) {
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) { radar.classList.add("in"); obs.disconnect(); }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      io.observe(radar);
-    } else {
-      radar.classList.add("in");
-    }
+  /* ---------- Back to top ---------- */
+  const toTop = document.getElementById("toTop");
+  if (toTop) {
+    window.addEventListener("scroll", () => {
+      toTop.classList.toggle("show", window.scrollY > 400);
+    }, { passive: true });
+    toTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
-  /* ---------- Ablauf: animated step-through timeline ---------- */
-  const psteps = Array.prototype.slice.call(document.querySelectorAll("#psteps .pstep"));
-  const plineFill = document.getElementById("plineFill");
-  if (psteps.length) {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const last = psteps.length - 1;
+  /* ---------- Sakura Stem (grows on scroll) ---------- */
+  const stemEl = document.getElementById("sakuraStem");
+  const stemFill = document.getElementById("sakuraFill");
+  if (stemEl && stemFill) {
+    const dots = stemEl.querySelectorAll(".sakura-dot");
 
-    const render = (cur) => {
-      psteps.forEach((step, i) => {
-        step.classList.toggle("done", i < cur);
-        step.classList.toggle("is-current", i === cur);
+    const updateStem = () => {
+      const rect = stemEl.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const raw = 1 - (rect.top / viewH);
+      const progress = Math.max(0, Math.min(1, raw * 1.6));
+
+      stemFill.style.width = (progress * 100) + "%";
+
+      dots.forEach((d, i) => {
+        const threshold = 0.2 + i * 0.13;
+        d.classList.toggle("show", progress >= threshold);
       });
-      if (plineFill) plineFill.style.setProperty("--p", last ? cur / last : 0);
     };
 
-    /* Wachstums-Diagramm: Linie einzeichnen + wandernden Punkt starten */
-    const pgraph = document.getElementById("pgraph");
-    const pgraphMotion = document.getElementById("pgraphMotion");
-    let graphLive = false;
-    const startGraph = () => {
-      if (graphLive || !pgraph) return;
-      graphLive = true;
-      pgraph.classList.add("is-live");
-      if (pgraphMotion && typeof pgraphMotion.beginElement === "function") {
-        try { pgraphMotion.beginElement(); } catch (e) { /* SMIL nicht verfügbar */ }
-      }
-    };
-
-    if (reduce) {
-      psteps.forEach((s) => s.classList.add("done"));
-      if (plineFill) plineFill.style.setProperty("--p", 1);
-    } else {
-      let cur = 0;
-      let timer = null;
-      const tick = () => { cur = cur >= last ? 0 : cur + 1; render(cur); };
-      const start = () => { startGraph(); if (!timer) { render(0); timer = setInterval(tick, 2200); } };
-      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-
-      const process = document.getElementById("process");
-      if (process && "IntersectionObserver" in window) {
-        const io = new IntersectionObserver(
-          (entries) => entries.forEach((e) => (e.isIntersecting ? start() : stop())),
-          { threshold: 0.35 }
-        );
-        io.observe(process);
-        process.addEventListener("mouseenter", stop);
-        process.addEventListener("mouseleave", start);
-      } else {
-        start();
-      }
-    }
+    window.addEventListener("scroll", updateStem, { passive: true });
+    updateStem();
   }
 
-  /* ---------- Count-up: Preise & Radar-Prozente ----------
-     Zahlen zählen beim Sichtbarwerden von 0 hoch; der Tausenderpunkt
-     (de-DE) wandert dabei sauber mit. Bei reduzierter Bewegung bleibt
-     der Endwert (aus dem HTML) einfach stehen. */
-  const counters = Array.prototype.slice.call(
-    document.querySelectorAll(".price-tag .amt, .radar-legend li b")
-  );
-  if (counters.length) {
-    const reduceCount = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const runCount = (el) => {
-      const raw = el.textContent.trim();
-      const suffix = raw.slice(-1) === "%" ? "%" : "";
-      const target = parseInt(raw.replace(/\D/g, ""), 10) || 0;
-      const dur = 900;
-      const t0 = performance.now();
-      const ease = (t) => 1 - Math.pow(1 - t, 3); /* ease-out cubic */
-      const step = (now) => {
-        const t = Math.min((now - t0) / dur, 1);
-        const val = Math.round(ease(t) * target);
-        el.textContent = val.toLocaleString("de-DE") + suffix;
-        if (t < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
+  /* ---------- Live Clock ---------- */
+  const clockEl = document.getElementById("liveClock");
+  if (clockEl) {
+    const updateClock = () => {
+      const now = new Date();
+      const de = now.toLocaleTimeString("de-DE", {
+        timeZone: "Europe/Berlin",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      clockEl.textContent = de;
     };
-
-    if (reduceCount || !("IntersectionObserver" in window)) {
-      /* nichts tun – Endwerte stehen bereits im HTML */
-    } else {
-      const io = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              runCount(entry.target);
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.6 }
-      );
-      counters.forEach((el) => io.observe(el));
-    }
+    updateClock();
+    setInterval(updateClock, 10000);
   }
 
-  /* ---------- Contact form ----------
-     Mit action-Endpunkt (Formspree): Versand per AJAX, ohne Seitenwechsel.
-     Ohne action (oder ohne fetch): Fallback öffnet das E-Mail-Programm via mailto.
-     Mit JS wird das Formular zum Mehrschritt-Funnel (Anliegen → Zeitrahmen →
-     Kontaktdaten); ohne JS bleiben alle Schritte untereinander sichtbar.
-  ------------------------------------ */
+  /* ---------- GitHub Stars/Repos ---------- */
+  const ghRepos = document.getElementById("ghRepos");
+  if (ghRepos) {
+    fetch("https://api.github.com/users/tim131103")
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (data) {
+          ghRepos.textContent = data.public_repos + " " + T[currentLang].repos;
+        }
+      })
+      .catch(() => {
+        ghRepos.textContent = "tim131103";
+      });
+  }
+
+  /* ---------- Contact form ---------- */
   const form = document.getElementById("contactForm");
   const status = document.getElementById("formStatus");
 
-  /* ---------- Funnel: Schrittsteuerung ---------- */
-  const fsteps = form ? Array.prototype.slice.call(form.querySelectorAll(".fstep")) : [];
-  let funnelShow = null; /* wird bei aktivem Funnel gesetzt (auch für Reset nach Versand) */
-
-  if (form && fsteps.length > 1) {
-    form.classList.add("is-funnel");
-    const bar = document.getElementById("funnelBar");
-    const label = document.getElementById("funnelLabel");
-    const backBtn = document.getElementById("funnelBack");
-    const submitBtn = form.querySelector('button[type="submit"]');
-    let cur = 0;
-
-    funnelShow = (i, focus) => {
-      cur = Math.max(0, Math.min(i, fsteps.length - 1));
-      fsteps.forEach((s, j) => s.classList.toggle("is-active", j === cur));
-      if (bar) bar.style.setProperty("--p", (cur + 1) / fsteps.length);
-      if (label) label.textContent = "Schritt " + (cur + 1) + " von " + fsteps.length;
-      if (backBtn) backBtn.hidden = cur === 0;
-      if (submitBtn) submitBtn.hidden = cur !== fsteps.length - 1;
-      if (focus) {
-        const f = fsteps[cur].querySelector("input, textarea");
-        if (f) f.focus({ preventScroll: true });
-      }
-    };
-
-    if (backBtn) backBtn.addEventListener("click", () => funnelShow(cur - 1, false));
-
-    /* Auswahl-Schritte: nach Klick auf eine Option kurz den gewählten Zustand
-       zeigen, dann automatisch weiter. Erneuter Klick auf die bereits gewählte
-       Option (z. B. nach "Zurück") führt ebenfalls weiter. */
-    fsteps.forEach((step, i) => {
-      if (i === fsteps.length - 1) return; /* letzter Schritt: normale Felder */
-      step.querySelectorAll(".opt-card").forEach((card) => {
-        card.addEventListener("click", () => {
-          setTimeout(() => {
-            const input = card.querySelector("input");
-            if (input && input.checked && cur === i) funnelShow(i + 1, true);
-          }, 220);
-        });
-      });
-    });
-
-    funnelShow(0, false);
-  }
-
   if (form) {
-    /* JS übernimmt Validierung + deutsche Meldungen; ohne JS bleibt die
-       native Browser-Validierung für den Formspree-Fallback aktiv. */
     form.setAttribute("novalidate", "");
     const endpoint = form.getAttribute("action");
 
@@ -313,6 +512,7 @@
     };
 
     const valid = () => {
+      const dict = T[currentLang];
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       const message = form.message.value.trim();
@@ -325,13 +525,13 @@
       mark(form.privacy, !privacy);
 
       if (!name || !email || !message || !privacy) {
-        status.textContent = "Bitte füllen Sie alle Pflichtfelder aus und bestätigen Sie die Datenschutzerklärung.";
-        status.classList.add("err");
+        status.textContent = dict.formErrFields;
+        status.className = "form-status err";
         return false;
       }
       if (!emailOk) {
-        status.textContent = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
-        status.classList.add("err");
+        status.textContent = dict.formErrEmail;
+        status.className = "form-status err";
         return false;
       }
       return true;
@@ -342,22 +542,13 @@
       status.className = "form-status";
       if (!valid()) return;
 
-      /* Funnel-Auswahl auslesen (kann leer sein, z. B. beim No-JS-Fallback nie) */
-      const anliegenEl = form.querySelector('input[name="anliegen"]:checked');
-      const zeitEl = form.querySelector('input[name="zeitrahmen"]:checked');
-      const anliegen = anliegenEl ? anliegenEl.value : "";
-      const zeitrahmen = zeitEl ? zeitEl.value : "";
-      const betreff = anliegen ? "Anfrage: " + anliegen : "Anfrage über createtim.de";
+      const dict = T[currentLang];
 
-      /* E-Mail-Betreff bei Formspree aus der Auswahl setzen */
-      const subj = form.querySelector('input[name="_subject"]');
-      if (subj) subj.value = betreff;
-
-      /* ----- Formspree (AJAX) ----- */
       if (endpoint && "fetch" in window) {
         const btn = form.querySelector("button[type=submit]");
         if (btn) btn.disabled = true;
-        status.textContent = "Wird gesendet …";
+        status.textContent = dict.formSending;
+        status.className = "form-status err";
 
         fetch(endpoint, {
           method: "POST",
@@ -366,21 +557,20 @@
         })
           .then((res) => {
             if (res.ok) {
-              status.textContent = "Vielen Dank! Ihre Nachricht wurde gesendet – ich melde mich i. d. R. innerhalb von 24 Stunden bei Ihnen.";
-              status.classList.add("ok");
+              status.textContent = dict.formOk;
+              status.className = "form-status ok";
               form.reset();
-              if (funnelShow) funnelShow(0, false);
               return;
             }
             return res.json().then((data) => {
               const msg = data && data.errors ? data.errors.map((x) => x.message).join(" ") : "";
-              status.textContent = "Senden fehlgeschlagen" + (msg ? ": " + msg : "") + ". Bitte versuchen Sie es erneut oder schreiben Sie an tim.lietzow@createtim.de.";
-              status.classList.add("err");
+              status.textContent = dict.formErr + (msg ? " " + msg : "");
+              status.className = "form-status err";
             });
           })
           .catch(() => {
-            status.textContent = "Senden fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie direkt an tim.lietzow@createtim.de.";
-            status.classList.add("err");
+            status.textContent = dict.formErr;
+            status.className = "form-status err";
           })
           .finally(() => {
             if (btn) btn.disabled = false;
@@ -388,23 +578,20 @@
         return;
       }
 
-      /* ----- Fallback: mailto ----- */
+      /* Fallback: mailto */
       const body =
         "Name: " + form.name.value.trim() + "\n" +
-        "E-Mail: " + form.email.value.trim() + "\n" +
-        (anliegen ? "Anliegen: " + anliegen + "\n" : "") +
-        (zeitrahmen ? "Zeitrahmen: " + zeitrahmen + "\n" : "") +
+        "Email: " + form.email.value.trim() + "\n" +
         "\n" + form.message.value.trim() + "\n";
 
       window.location.href =
         "mailto:tim.lietzow@createtim.de" +
-        "?subject=" + encodeURIComponent(betreff) +
+        "?subject=" + encodeURIComponent("Anfrage über createtim.de") +
         "&body=" + encodeURIComponent(body);
 
-      status.textContent = "Danke! Ihr E-Mail-Programm öffnet sich – bitte senden Sie die Nachricht ab. Alternativ erreichen Sie mich direkt unter tim.lietzow@createtim.de.";
-      status.classList.add("ok");
+      status.textContent = dict.formMailto;
+      status.className = "form-status ok";
       form.reset();
-      if (funnelShow) funnelShow(0, false);
     });
   }
 })();

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formspree.io https://api.github.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
+  <title>Kontakt · createtim</title>
+  <meta name="description" content="Kontaktieren Sie Tim Lietzow von createtim – Data Science, Software & Webdesign aus Buxtehude." />
+  <meta name="theme-color" content="#fff8f5" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/img/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div class="pw-gate" id="pwGate">
+    <svg class="pw-gate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <h2>In Wartung</h2>
+    <p>Diese Seite ist gerade nicht verfügbar.</p>
+    <form id="pwForm" class="pw-bottom">
+      <input type="password" id="pwInput" class="pw-input" placeholder="Passwort" autocomplete="off" />
+      <button type="submit" class="pw-btn">OK</button>
+    </form>
+    <p class="pw-err" id="pwErr">Falsches Passwort.</p>
+  </div>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="createtim Startseite">
+        <span class="brand-mark" aria-hidden="true">c</span>
+        <span class="brand-word">create<b>tim</b></span>
+      </a>
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" class="is-active" data-i18n="navKontakt">Kontakt</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langLabel">DE</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="nav-links">
+        <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" class="is-active" data-i18n="navKontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+
+    <section class="hero container">
+      <span class="eyebrow reveal" data-i18n="ktEyebrow">Kontakt</span>
+      <h1 class="reveal" data-i18n="ktH1">Schreiben Sie mir</h1>
+      <p class="lead reveal d1" data-i18n="ktLead">Schreiben Sie mir kurz, worum es geht — ich melde mich zeitnah.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="reveal">
+            <dl class="contact-list">
+              <div class="contact-item">
+                <dt data-i18n="ktTel">Telefon</dt>
+                <dd><a href="tel:+491629856176">+49 162 9856176</a></dd>
+              </div>
+              <div class="contact-item">
+                <dt data-i18n="ktEmail">E-Mail</dt>
+                <dd><a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a></dd>
+              </div>
+              <div class="contact-item">
+                <dt data-i18n="ktAdresse">Adresse</dt>
+                <dd data-i18n-html="ktAdresseVal">Hauptstraße 9<br/>21614 Buxtehude</dd>
+              </div>
+              <div class="contact-item">
+                <dt data-i18n="ktErreich">Erreichbarkeit</dt>
+                <dd data-i18n="ktErreichVal">Mo–Fr, Antwort i.d.R. innerhalb 24h</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="form-card reveal d1">
+            <form id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST">
+              <input type="hidden" name="_subject" value="Anfrage über createtim.de" />
+              <div class="field-row">
+                <div class="field">
+                  <label for="name" data-i18n="formName">Name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required placeholder="Max Mustermann" data-i18n-ph="formNamePh" />
+                </div>
+                <div class="field">
+                  <label for="email" data-i18n="formEmail">E-Mail</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required placeholder="max@firma.de" data-i18n-ph="formEmailPh" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="message" data-i18n="formNachricht">Nachricht</label>
+                <textarea id="message" name="message" required placeholder="Worum geht es?" data-i18n-ph="formMsgPh"></textarea>
+              </div>
+              <label class="check-row">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                <span data-i18n="formPrivacy">Datenschutzerklärung gelesen, Verarbeitung ok. *</span>
+              </label>
+              <button type="submit" class="btn-submit">
+                <span data-i18n="formSubmit">Nachricht senden</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              </button>
+              <div class="form-status" id="formStatus" role="status"></div>
+              <p class="form-note" data-i18n="formNote">* Pflichtfelder. Daten nur zur Bearbeitung Ihrer Anfrage.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year">2026</span> createtim &middot; Tim Lietzow</span>
+      <div class="footer-links">
+        <a href="impressum.html" data-i18n="footerImpressum">Impressum</a>
+        <a href="datenschutz.html" data-i18n="footerDatenschutz">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

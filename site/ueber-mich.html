@@ -4,16 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formspree.io https://api.github.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
-  <title>Datenschutzerklärung · createtim</title>
-  <meta name="description" content="Datenschutzerklärung von createtim – Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO." />
-  <meta name="robots" content="noindex, follow" />
+  <title>Über mich · createtim</title>
+  <meta name="description" content="Tim Lietzow – Dualer Student Informatik, ausgelernter Anwendungsentwickler. Data Science als Hauptfeld." />
   <meta name="theme-color" content="#fff8f5" />
   <meta name="color-scheme" content="light" />
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/assets/img/favicon-96.png" type="image/png" sizes="96x96" />
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
-  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -31,16 +30,17 @@
   </div>
 
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
   <header class="site-header" id="header">
     <div class="container nav">
       <a href="/" class="brand" aria-label="createtim Startseite">
-        <span class="brand-mark">c</span>
+        <span class="brand-mark" aria-hidden="true">c</span>
         <span class="brand-word">create<b>tim</b></span>
       </a>
       <nav class="nav-links" aria-label="Hauptnavigation">
         <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
         <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
-        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="ueber-mich.html" class="is-active" data-i18n="navUeberMich">Über mich</a>
         <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
       </nav>
       <div class="nav-cta">
@@ -48,61 +48,80 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span id="langLabel">DE</span>
         </button>
-        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
       </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <nav class="nav-links">
         <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
         <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
-        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="ueber-mich.html" class="is-active" data-i18n="navUeberMich">Über mich</a>
         <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
       </nav>
     </div>
   </header>
-  <main class="page container" id="main">
-    <div class="page-head">
-      <span class="eyebrow">Rechtliches</span>
-      <h1>Datenschutzerklärung</h1>
-      <p class="lead">Der Schutz Ihrer persönlichen Daten ist mir wichtig.</p>
-    </div>
-    <div class="legal-body">
-      <h2>1. Verantwortlicher</h2>
-      <div class="legal-card">
-        <p>Tim Lietzow<br/>createtim<br/>Hauptstraße 9<br/>21614 Buxtehude<br/>Deutschland<br/><br/>Telefon: <a href="tel:+491629856176">+49 162 9856176</a><br/>E-Mail: <a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a></p>
+
+  <main class="page" id="main">
+
+    <section class="hero container">
+      <span class="eyebrow reveal" data-i18n="ubmEyebrow">Über mich</span>
+      <h1 class="reveal">Tim Lietzow</h1>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="reveal">
+            <img src="assets/img/tim.jpg" alt="Tim Lietzow" class="about-photo" width="280" height="350" loading="lazy" />
+          </div>
+          <div class="about-text">
+            <h2 class="reveal" data-i18n="ubmWerH2">Wer ich bin</h2>
+            <p class="reveal" data-i18n="ubmWer">
+              Ich bin Tim, aus Buxtehude. Ich studiere Informatik im dualen Modell
+              und habe meine Ausbildung zum Fachinformatiker für Anwendungsentwicklung
+              schon in der Tasche.
+            </p>
+
+            <h2 class="reveal" data-i18n="ubmWasH2">Was ich mache</h2>
+            <p class="reveal" data-i18n="ubmWas1">
+              Data Science ist mein Hauptfeld. Ich analysiere Daten, baue Modelle,
+              automatisiere Abläufe. KI nutze ich dabei als Werkzeug — weil ich
+              die richtigen Fragen stellen kann, nicht weil ich sonst nichts kann.
+            </p>
+            <p class="reveal" data-i18n="ubmWas2">
+              Webdesign mache ich, weil ich gerne Dinge baue, die funktionieren.
+              Wenn ein lokaler Betrieb eine Website braucht, helfe ich gern.
+              Aber mein Schwerpunkt liegt auf Anwendungen und Software.
+            </p>
+
+            <h2 class="reveal" data-i18n="ubmWarumH2">Warum Buxtehude?</h2>
+            <p class="reveal" data-i18n="ubmWarum">
+              Ich kenne die Region, spreche Ihre Sprache und weiß, was lokale
+              Betriebe brauchen. Keine anonyme Hotline, sondern ein fester
+              Ansprechpartner aus der Nachbarschaft.
+            </p>
+
+            <h2 class="reveal" data-i18n="ubmAntH2">Was mich antreibt</h2>
+            <p class="reveal" data-i18n="ubmAnt">
+              Etwas zu bauen, das funktioniert. Keine coolen Demos,
+              sondern Lösungen, die im Alltag helfen. Dazu lerne ich ständig
+              dazu — Technik verändert sich schnell, und ich verändere mich mit.
+            </p>
+
+            <div class="about-links reveal">
+              <a href="tel:+491629856176">+49 162 9856176</a>
+              <a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a>
+              <a href="https://github.com/tim131103" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <h2>2. Allgemeines zur Datenverarbeitung</h2>
-      <p>Ich verarbeite personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie meiner Inhalte und Leistungen erforderlich ist. Rechtsgrundlage ist die DSGVO sowie das BDSG.</p>
-      <h2>3. Hosting</h2>
-      <p>Diese Website wird bei GitHub, Inc. (GitHub Pages) gehostet. Da der Anbieter seinen Sitz in den USA hat, kann eine Übermittlung personenbezogener Daten in ein Drittland stattfinden. Grundlage sind die EU-Standardvertragsklauseln bzw. das EU-U.S. Data Privacy Framework.</p>
-      <h2>4. Server-Logfiles</h2>
-      <p>Beim Aufrufen dieser Website werden automatisch Informationen in Logfiles gespeichert (IP-Adresse, Datum/Uhrzeit, Browser, Referrer-URL). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</p>
-      <h2>5. Kontaktaufnahme</h2>
-      <p>Über das Kontaktformular übermittelte Daten (Name, E-Mail, Nachricht) werden zwecks Bearbeitung der Anfrage gespeichert. Technischer Versand über Formspree (Formspree, Inc., USA). Rechtsgrundlage: Art. 6 Abs. 1 lit. b und lit. f DSGVO.</p>
-      <h2>6. Cookies</h2>
-      <p>Diese Website verwendet keine Tracking- oder Marketing-Cookies.</p>
-      <h2>7. Schriftarten</h2>
-      <p>Lokal gehostete Webfonts. Keine Verbindung zu Servern Dritter.</p>
-      <h2>8. Ihre Rechte</h2>
-      <ul>
-        <li>Auskunft (Art. 15 DSGVO)</li>
-        <li>Berichtigung (Art. 16 DSGVO)</li>
-        <li>Löschung (Art. 17 DSGVO)</li>
-        <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-        <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-        <li>Widerspruch (Art. 21 DSGVO)</li>
-        <li>Widerruf einer Einwilligung (Art. 7 Abs. 3 DSGVO)</li>
-      </ul>
-      <h2>9. Beschwerderecht</h2>
-      <p>Im Falle von Verstößen gegen die DSGVO steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu (Landesbeauftragte für den Datenschutz Niedersachsen).</p>
-      <h2>10. SSL/TLS</h2>
-      <p>Diese Seite nutzt aus Sicherheitsgründen eine SSL-/TLS-Verschlüsselung.</p>
-      <a href="index.html" class="back-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-        Startseite
-      </a>
-    </div>
+    </section>
+
   </main>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>&copy; <span id="year">2026</span> createtim &middot; Tim Lietzow</span>
@@ -112,6 +131,13 @@
       </div>
     </div>
   </footer>
+
+  <button class="to-top" id="toTop" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

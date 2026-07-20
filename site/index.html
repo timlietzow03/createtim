@@ -3,48 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
-  <title>createtim · Webdesign, Wartung & SEO für lokale Betriebe | Buxtehude · Stade · Hamburg</title>
-  <meta name="description" content="createtim – Tim Lietzow gestaltet, entwickelt und pflegt moderne, schnelle Websites für Unternehmen und lokale Betriebe in Buxtehude, Stade und Hamburg. Webdesign, Wartung, SEO, Hosting und individuelle Software (Tools, Automatisierung, KI &amp; Machine Learning). Jetzt kostenloses Erstgespräch sichern." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formspree.io https://api.github.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
+  <title>createtim · Data Science, Software & Webdesign | Buxtehude</title>
+  <meta name="description" content="Tim Lietzow – Data Science, Machine Learning, Automatisierung und Webdesign aus Buxtehude." />
   <meta name="author" content="Tim Lietzow" />
-  <meta name="theme-color" content="#fff6f9" />
+  <meta name="theme-color" content="#fff8f5" />
   <meta name="color-scheme" content="light" />
   <meta name="google-site-verification" content="RXoGtfTzVvw3I93WFnyreQ5y6z_O2_LUJDwt72rJvg0" />
   <link rel="canonical" href="https://www.createtim.de/" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="createtim · Moderne Websites für lokale Betriebe" />
-  <meta property="og:description" content="Webdesign, Wartung & SEO aus Buxtehude. Schnelle, moderne Websites für Unternehmen in Buxtehude, Stade und Hamburg." />
+  <meta property="og:title" content="createtim · Data Science, Software & Webdesign" />
+  <meta property="og:description" content="Data Science, Machine Learning, Automatisierung und Webdesign aus Buxtehude." />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:url" content="https://www.createtim.de/" />
   <meta property="og:image" content="https://www.createtim.de/assets/img/og-image.jpg" />
-  <meta property="og:image:alt" content="createtim · Webdesign, Wartung & SEO für lokale Betriebe" />
+  <meta property="og:image:alt" content="createtim · Data Science, Software & Webdesign" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="createtim · Moderne Websites & Software für lokale Betriebe" />
-  <meta name="twitter:description" content="Webdesign, Software, Wartung & SEO aus Buxtehude – für Unternehmen in Buxtehude, Stade und Hamburg." />
+  <meta name="twitter:title" content="createtim · Data Science, Software & Webdesign" />
+  <meta name="twitter:description" content="Data Science, Machine Learning, Automatisierung und Webdesign aus Buxtehude." />
   <meta name="twitter:image" content="https://www.createtim.de/assets/img/og-image.jpg" />
-
-  <!-- Favicon als echte Dateien: Google zeigt Favicons aus data:-URIs nicht in der Suche an -->
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/assets/img/favicon-96.png" type="image/png" sizes="96x96" />
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
-
-  <!-- Fonts (self-hosted, see assets/css/style.css @font-face) -->
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
-
   <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Ohne JavaScript: Scroll-Reveal-Inhalte sofort sichtbar machen -->
-  <noscript><style>.reveal{opacity:1;transform:none}.radar-data{opacity:1;transform:none}.radar-dot{opacity:1}.pline-fill{--p:1}.pstep .pnode{background:var(--grad);color:#fff;border-color:transparent}.pstep .pnode .pnum{display:none}.pstep .pnode .check{display:block}.pgraph-line{stroke-dashoffset:0}.pgraph-area{opacity:1}.pgraph-marker{display:none}</style></noscript>
-
-  <!-- Structured data: local business -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "createtim",
-    "description": "Webdesign, Wartung, SEO und individuelle Softwareentwicklung (Tools, Automatisierung, KI & Machine Learning) für lokale Betriebe in Buxtehude, Stade und Hamburg.",
+    "description": "Data Science, Machine Learning, Automatisierung und Webdesign für lokale Betriebe in Buxtehude, Stade und Hamburg.",
     "founder": "Tim Lietzow",
     "url": "https://www.createtim.de",
     "logo": "https://www.createtim.de/assets/img/icon-192.png",
@@ -65,775 +54,300 @@
 </head>
 <body>
 
-  <a class="skip-link" href="#top">Zum Inhalt springen</a>
+  <!-- Password Gate -->
+  <div class="pw-gate" id="pwGate">
+    <svg class="pw-gate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <h2>In Wartung</h2>
+    <p>Diese Seite ist gerade nicht verfügbar.</p>
+    <form id="pwForm" class="pw-bottom">
+      <input type="password" id="pwInput" class="pw-input" placeholder="Passwort" autocomplete="off" />
+      <button type="submit" class="pw-btn">OK</button>
+    </form>
+    <p class="pw-err" id="pwErr">Falsches Passwort.</p>
+  </div>
 
-  <!-- ===================== Header ===================== -->
+  <!-- Sakura petals -->
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
   <header class="site-header" id="header">
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="createtim – Startseite">
+      <a href="/" class="brand" aria-label="createtim Startseite">
         <span class="brand-mark" aria-hidden="true">c</span>
-        <span class="brand-word">create<span class="mid" aria-hidden="true">·</span><b>tim</b></span>
+        <span class="brand-word">create<b>tim</b></span>
       </a>
-
       <nav class="nav-links" aria-label="Hauptnavigation">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#software">Software</a>
-        <a href="#skills">Skills</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#preise">Preise</a>
-        <a href="#ueber">Über mich</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
       </nav>
-
       <div class="nav-cta">
-        <a href="#kontakt" class="btn btn--primary">
-          Erstgespräch
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+        <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langLabel">DE</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
       </div>
     </div>
-
-    <!-- Mobile menu -->
     <div class="mobile-menu" id="mobileMenu">
-      <div class="nav-links">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#software">Software</a>
-        <a href="#skills">Skills</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#preise">Preise</a>
-        <a href="#ueber">Über mich</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
-      <a href="#kontakt" class="btn btn--primary">Kostenloses Erstgespräch</a>
+      <nav class="nav-links">
+        <a href="leistungen.html" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
+      </nav>
     </div>
-
-    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   </header>
 
-  <main id="top">
+  <main id="main">
 
-    <!-- ===================== Hero ===================== -->
-    <section class="hero">
-      <div class="hero-bg">
-        <span class="blob b1"></span>
-        <span class="blob b2"></span>
-        <span class="grid"></span>
-        <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
-      </div>
+    <!-- Hero -->
+    <section class="hero container">
+      <h1 class="reveal"><span class="gradient-text">Tim Lietzow</span></h1>
+      <p class="lead reveal d1" data-i18n="heroLead">
+        Data Science, Software und Webdesign aus Buxtehude.
+        Ich helfe lokalen Betrieben, ihre Probleme mit Technik zu lösen.
+      </p>
+    </section>
 
+    <!-- Was ich mache -->
+    <section class="section section--soft">
       <div class="container">
-        <!-- Signatur-Hero: die Seite öffnet wie Tims Code-Editor. Links schreibt
-             sich der Pitch als Code, rechts das "kompilierte" Ergebnis (echtes
-             H1 / Lead / CTA). Editor + Terminal + Statusleiste sind dekorativ. -->
-        <div class="hero-ide">
-          <div class="ide">
-            <div class="ide-bar">
-              <span class="ide-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ide-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>
-                createtim — hero.tsx
-              </span>
-              <span class="ide-bar-spacer" aria-hidden="true"></span>
+        <div class="section-label reveal" aria-hidden="true" data-i18n="sectionWasIchMache">Was ich mache</div>
+        <div class="split split--wide">
+          <div class="service-list reveal">
+            <div class="service-item">
+              <h3 data-i18n="serviceDS">Data Science & Analyse</h3>
+              <p data-i18n="serviceDSDesc">Aus Daten Erkenntnisse gewinnen — Auswertungen, Prognosen, Dashboards. Damit Sie fundiert entscheiden können.</p>
             </div>
-
-            <div class="ide-tabs" aria-hidden="true">
-              <span class="ide-tab active"><span class="d"></span>hero<span class="ext">.tsx</span></span>
-              <a class="ide-tab" href="#leistungen">leistungen<span class="ext">.ts</span></a>
-              <a class="ide-tab" href="#software">software<span class="ext">.py</span></a>
-              <a class="ide-tab" href="#ueber">ueber<span class="ext">.md</span></a>
-              <a class="ide-tab" href="#kontakt">kontakt<span class="ext">.json</span></a>
+            <div class="service-item">
+              <h3 data-i18n="serviceAuto">Automatisierung</h3>
+              <p data-i18n="serviceAutoDesc">Wiederkehrende Aufgaben per Skript erledigen. Daten zusammenführen, Berichte erzeugen, Systeme verbinden.</p>
             </div>
-
-            <div class="ide-body">
-              <div class="ide-editor" aria-hidden="true">
-                <div class="ide-gutter">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</div>
-                <pre class="ide-code"><span class="ln"><span class="tok-c">// createtim · gebaut in Buxtehude</span></span><span class="ln"> </span><span class="ln"><span class="tok-k">const</span> <span class="tok-v">tim</span> <span class="tok-o">=</span> {</span><span class="ln">  <span class="tok-p">rolle</span>:   <span class="tok-s">"Webdesign · Software · SEO"</span>,</span><span class="ln">  <span class="tok-p">baut</span>:    [<span class="tok-s">"Websites"</span>, <span class="tok-s">"Tools"</span>, <span class="tok-s">"KI-Agenten"</span>],</span><span class="ln">  <span class="tok-p">region</span>:  [<span class="tok-s">"Buxtehude"</span>, <span class="tok-s">"Stade"</span>, <span class="tok-s">"Hamburg"</span>],</span><span class="ln">  <span class="tok-p">agentur</span>: <span class="tok-n">false</span>,</span><span class="ln">};</span><span class="ln"> </span><span class="ln"><span class="tok-k">export default function</span> <span class="tok-f">fuerSie</span>() {</span><span class="ln">  <span class="tok-k">return</span> tim.<span class="tok-p">baut</span>.<span class="tok-f">map</span>(bauen);<span class="cursor"></span></span><span class="ln">}</span></pre>
-              </div>
-
-              <div class="ide-preview">
-                <span class="hero-badge"><span class="pulse"></span> verfügbar für neue projekte</span>
-                <h1>Ich baue Websites &amp; Software, die <span class="gradient-text">für Sie arbeiten</span>.</h1>
-                <p class="lead">Hi, ich bin Tim. Ich gestalte, entwickle und pflege schnelle, moderne Websites – und baue Tools, Automatisierungen und KI-Lösungen für Betriebe in Buxtehude, Stade und Hamburg.</p>
-                <div class="hero-actions">
-                  <a href="#kontakt" class="btn btn--primary btn--lg">
-                    Kostenloses Erstgespräch
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                  </a>
-                  <a href="#leistungen" class="btn btn--ghost btn--lg">Was ich mache</a>
-                </div>
-              </div>
+            <div class="service-item">
+              <h3 data-i18n="serviceWeb">Webdesign</h3>
+              <p data-i18n="serviceWebDesc">Websites, die aussehen wie Sie wollen und funktionieren wie sie sollen. Responsive, schnell, suchmaschinenfreundlich.</p>
             </div>
-
-            <div class="ide-terminal" aria-hidden="true">
-              <span class="prompt">tim@createtim</span>:<span class="path">~</span>$ <span class="cmd">npm run grow</span><span class="caret"></span>
-              <span class="out"><span class="ok">✓</span> build erfolgreich <span class="mut">· &lt; 1,5 s · 100% handgemacht · kein Agentur-Aufschlag</span></span>
-            </div>
-
-            <div class="ide-status" aria-hidden="true">
-              <span>⎇ main</span>
-              <span>● Buxtehude · Stade · Hamburg</span>
-              <span class="sp">UTF-8</span>
-              <span>TypeScript · Python</span>
-            </div>
+          </div>
+          <div class="reveal d1">
+            <p data-i18n="aboutP1">
+              Ich bin Dualer Student Informatik und ausgelernter Anwendungsentwickler.
+              Data Science ist mein Hauptfeld — aber wenn Sie eine Website brauchen,
+              baue ich die auch.
+            </p>
+            <p style="margin-top:1rem" data-i18n="aboutP2">
+              KI nutze ich als Werkzeug, nicht als Verkaufsversprechen.
+              Weil ich die richtigen Fragen stellen kann.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== Leistungen ===================== -->
-    <section class="section" id="leistungen">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Leistungen</span>
-          <h2>Was ich für Sie umsetzen kann</h2>
-          <p>Vom ersten Entwurf bis zur laufenden Pflege – bei mir bekommen Sie alles aus einer Hand. Persönlich, ehrlich und zu fairen Preisen, ganz ohne Agentur-Aufschlag.</p>
-        </div>
+    <!-- Sakura Stem -->
+    <div class="sakura-stem reveal" id="sakuraStem" aria-hidden="true">
+      <div class="sakura-stem-fill" id="sakuraFill"></div>
+      <div class="sakura-dot d1"></div>
+      <div class="sakura-dot d2"></div>
+      <div class="sakura-dot d3"></div>
+      <div class="sakura-dot d4"></div>
+      <div class="sakura-dot d5"></div>
+      <div class="sakura-dot d6"></div>
+    </div>
 
-        <div class="cards cards--stagger">
-          <article class="card reveal">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M7 21h10M9 13l2 2 4-4"/></svg></div>
-            <h3>Webdesign</h3>
-            <p>Modernes, individuelles Design, das zu Ihrer Marke passt und Besucher zu Kunden macht – nicht von der Stange.</p>
-            <div class="tags"><span>UI/UX</span><span>Branding</span><span>Mobile First</span></div>
-          </article>
-
-          <article class="card reveal d1">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></div>
-            <h3>Webentwicklung</h3>
-            <p>Technisch sauber umgesetzt mit modernem Code – schnell, sicher und auf jedem Gerät zuverlässig.</p>
-            <div class="tags"><span>HTML/CSS/JS</span><span>WordPress</span><span>Clean Code</span></div>
-          </article>
-
-          <article class="card reveal d2">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l6-6a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></div>
-            <h3>Wartung &amp; Support</h3>
-            <p>Updates, Backups, Sicherheit und kleine Änderungen – ich halte Ihre Website dauerhaft aktuell und stabil.</p>
-            <div class="tags"><span>Updates</span><span>Backups</span><span>Sicherheit</span></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
-            <h3>SEO &amp; Sichtbarkeit</h3>
-            <p>Damit Kunden Sie bei Google finden: saubere Technik, sinnvolle Keywords und lokale Suchmaschinen­optimierung.</p>
-            <div class="tags"><span>Local SEO</span><span>Google</span><span>Meta-Tags</span></div>
-          </article>
-
-          <article class="card reveal d1">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></div>
-            <h3>Performance</h3>
-            <p>Schnelle Ladezeiten und Top-Werte bei Core Web Vitals – gut für Ihre Besucher und Ihr Google-Ranking.</p>
-            <div class="tags"><span>Core Web Vitals</span><span>Speed</span></div>
-          </article>
-
-          <article class="card reveal d2">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
-            <h3>Hosting &amp; Einrichtung</h3>
-            <p>Auf Wunsch übernehme ich das Hosting, kümmere mich um Domain und E-Mail und richte alles ein, damit Ihre Seite zuverlässig online geht. Auch bei kleineren technischen Fragen helfe ich gern weiter.</p>
-            <div class="tags"><span>Hosting</span><span>Domains</span><span>E-Mail</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== Software & Tools ===================== -->
-    <section class="section section--brand" id="software">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Software &amp; Tools</span>
-          <h2>Individuelle Software, die Ihnen Arbeit abnimmt</h2>
-          <p>Mein eigentliches Zuhause ist die Anwendungsentwicklung. Wenn ein Arbeitsschritt ständig Zeit frisst oder es für Ihr Problem keine fertige Lösung gibt, baue ich Ihnen ein passendes Tool – von der kleinen Automatisierung bis zur KI-gestützten Anwendung.</p>
-        </div>
-
-        <div class="cards cards--stagger">
-          <article class="card reveal">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2.5"/><circle cx="12" cy="3.6" r="1.3"/><path d="M12 4.9V8"/><path d="M9 13h.01M15 13h.01"/><path d="M9.5 16h5"/></svg></div>
-            <h3>KI-Agenten &amp; Assistenten</h3>
-            <p>Agentische KI, die eigenständig Aufgaben übernimmt: Anfragen beantworten, Dokumente auswerten und Abläufe automatisieren – angebunden an Ihre Daten und Werkzeuge.</p>
-            <div class="tags"><span>Agentic AI</span><span>Chatbots</span><span>LLMs</span></div>
-          </article>
-
-          <article class="card reveal d1">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/></svg></div>
-            <h3>Automatisierung &amp; Skripte</h3>
-            <p>Wiederkehrende Aufgaben erledige ich per Python-Skript automatisch: Daten zusammenführen, Berichte erzeugen, Dateien verarbeiten und Systeme miteinander verbinden.</p>
-            <div class="tags"><span>Python</span><span>Automatisierung</span><span>Skripte</span></div>
-          </article>
-
-          <article class="card reveal d2">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
-            <h3>Datenanalyse &amp; Machine Learning</h3>
-            <p>Aus Ihren Daten Erkenntnisse gewinnen: Auswertungen, Prognosen und ML-Modelle, die Muster erkennen und Entscheidungen unterstützen.</p>
-            <div class="tags"><span>Machine Learning</span><span>Datenanalyse</span><span>Prognosen</span></div>
-          </article>
-
-          <article class="card reveal">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
-            <h3>Individuelle Tools &amp; Anwendungen</h3>
-            <p>Maßgeschneiderte kleine Programme statt umständlicher Excel-Listen: Angebots- und Rechnungs-Generatoren, interne Tools sowie Buchungs- und Verwaltungssysteme.</p>
-            <div class="tags"><span>Individualsoftware</span><span>Web-Apps</span><span>Tools</span></div>
-          </article>
-
-          <article class="card reveal d1">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><path d="M8 12h8"/></svg></div>
-            <h3>Schnittstellen &amp; Integrationen</h3>
-            <p>Ich verbinde Ihre vorhandenen Programme und Dienste, damit Daten automatisch dorthin fließen, wo Sie sie brauchen – ganz ohne doppelte Tipparbeit.</p>
-            <div class="tags"><span>APIs</span><span>Integration</span><span>Datenfluss</span></div>
-          </article>
-
-          <article class="card reveal d2">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5A4.6 4.6 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
-            <h3>Idee, Konzept &amp; Umsetzung</h3>
-            <p>Sie haben eine Idee, wissen aber nicht, ob und wie sie umsetzbar ist? Wir schauen gemeinsam, was sinnvoll ist – und ich setze es um, wenn es passt.</p>
-            <div class="tags"><span>Konzept</span><span>Prototyp</span><span>Umsetzung</span></div>
-          </article>
-        </div>
-
-        <div class="reveal d1" style="text-align:center; margin-top:clamp(36px,5vw,56px);">
-          <p style="max-width:620px; margin:0 auto 1.6rem; color:var(--muted);">Jedes Tool ist anders – ein pauschales „Tool X für Y €" gibt es daher nicht. Nach einem kurzen Gespräch bekommen Sie ein individuelles Festpreis-Angebot: transparent und ohne versteckte Kosten.</p>
-          <a href="#kontakt" class="btn btn--primary btn--lg">
-            Projekt besprechen
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== Skills ===================== -->
-    <section class="section section--soft" id="skills">
-      <div class="container skills-wrap">
-        <div class="reveal">
-          <span class="eyebrow">Skills &amp; Technologien</span>
-          <h2>Ein breites Werkzeug­set für Ihr Projekt</h2>
-          <p style="margin-top:1rem">Ich arbeite mit aktuellen Web-Technologien und Werkzeugen – immer mit dem Ziel, ein Ergebnis zu liefern, das schnell, sicher und langfristig wartbar ist. Dabei lerne ich ständig dazu und bleibe technisch am Ball.</p>
-
-          <div class="chips">
-            <span class="chip"><span class="d"></span>HTML5</span>
-            <span class="chip"><span class="d"></span>CSS3</span>
-            <span class="chip"><span class="d"></span>JavaScript</span>
-            <span class="chip"><span class="d"></span>Python</span>
-            <span class="chip"><span class="d"></span>Machine Learning</span>
-            <span class="chip"><span class="d"></span>KI &amp; Agenten</span>
-            <span class="chip"><span class="d"></span>Responsive Design</span>
-            <span class="chip"><span class="d"></span>WordPress</span>
-            <span class="chip"><span class="d"></span>SEO</span>
-            <span class="chip"><span class="d"></span>Performance</span>
-            <span class="chip"><span class="d"></span>Barrierefreiheit</span>
-            <span class="chip"><span class="d"></span>Hosting &amp; Domains</span>
-            <span class="chip"><span class="d"></span>Git</span>
-            <span class="chip"><span class="d"></span>Figma</span>
-            <span class="chip"><span class="d"></span>Analytics</span>
-          </div>
-        </div>
-
-        <div class="radar-wrap reveal d1" id="radar">
-          <svg class="radar" viewBox="0 0 360 305" aria-hidden="true">
-            <defs>
-              <radialGradient id="radarFill" cx="50%" cy="50%" r="65%">
-                <stop offset="0%" stop-color="#f78cb6" stop-opacity="0.55" />
-                <stop offset="100%" stop-color="#e0518c" stop-opacity="0.30" />
-              </radialGradient>
-            </defs>
-
-            <!-- grid rings -->
-            <circle class="radar-ring" cx="180" cy="160" r="30" />
-            <circle class="radar-ring" cx="180" cy="160" r="60" />
-            <circle class="radar-ring" cx="180" cy="160" r="90" />
-            <circle class="radar-ring" cx="180" cy="160" r="120" />
-
-            <!-- axes -->
-            <line class="radar-axis" x1="180" y1="160" x2="180"   y2="40" />
-            <line class="radar-axis" x1="180" y1="160" x2="273.8" y2="85.2" />
-            <line class="radar-axis" x1="180" y1="160" x2="297"   y2="186.7" />
-            <line class="radar-axis" x1="180" y1="160" x2="232.1" y2="268.1" />
-            <line class="radar-axis" x1="180" y1="160" x2="127.9" y2="268.1" />
-            <line class="radar-axis" x1="180" y1="160" x2="63"    y2="186.7" />
-            <line class="radar-axis" x1="180" y1="160" x2="86.2"  y2="85.2" />
-
-            <!-- data polygon -->
-            <polygon class="radar-data" points="180,52 259.7,96.4 285.3,184 224.3,251.9 140.9,241.1 77.1,183.5 106.8,101.6" />
-
-            <!-- vertices -->
-            <circle class="radar-dot" cx="180"   cy="52"    r="4" />
-            <circle class="radar-dot" cx="259.7" cy="96.4"  r="4" />
-            <circle class="radar-dot" cx="285.3" cy="184"   r="4" />
-            <circle class="radar-dot" cx="224.3" cy="251.9" r="4" />
-            <circle class="radar-dot" cx="140.9" cy="241.1" r="4" />
-            <circle class="radar-dot" cx="77.1"  cy="183.5" r="4" />
-            <circle class="radar-dot" cx="106.8" cy="101.6" r="4" />
-
-            <!-- labels -->
-            <text class="radar-label" x="180"   y="30"    text-anchor="middle">Design</text>
-            <text class="radar-label" x="289.5" y="73"    text-anchor="start">Frontend</text>
-            <text class="radar-label" x="307"   y="191"   text-anchor="start">Python</text>
-            <text class="radar-label" x="240.7" y="287"   text-anchor="start">KI &amp; ML</text>
-            <text class="radar-label" x="119.3" y="287"   text-anchor="end">SEO</text>
-            <text class="radar-label" x="53"    y="191"   text-anchor="end">Wartung</text>
-            <text class="radar-label" x="70.5"  y="73"    text-anchor="end">Hosting</text>
-          </svg>
-
-          <ul class="radar-legend">
-            <li><span class="d"></span>Webdesign &amp; UI/UX <b>90%</b></li>
-            <li><span class="d"></span>Frontend-Entwicklung <b>85%</b></li>
-            <li><span class="d"></span>Python &amp; Automatisierung <b>90%</b></li>
-            <li><span class="d"></span>KI, Agenten &amp; ML <b>85%</b></li>
-            <li><span class="d"></span>SEO &amp; Performance <b>75%</b></li>
-            <li><span class="d"></span>Wartung &amp; Support <b>88%</b></li>
-            <li><span class="d"></span>Hosting &amp; Einrichtung <b>78%</b></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== Ablauf ===================== -->
-    <section class="section" id="ablauf">
-      <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow eyebrow--center">Ablauf</span>
-          <h2>So entsteht Ihre Website</h2>
-          <p>Ein klarer, transparenter Weg – vom ersten Gespräch bis zur fertigen Seite, die online geht und gepflegt wird.</p>
-        </div>
-
-        <div class="process reveal" id="process">
-          <!-- Lebendiges "Wachstums"-Diagramm: zeichnet sich beim Scrollen ein,
-               ein leuchtender Punkt wandert in einer Endlosschleife die Kurve
-               hinauf und wieder hinab. Rein dekorativ (aria-hidden). -->
-          <div class="pgraph" id="pgraph" aria-hidden="true">
-            <svg class="pgraph-svg" viewBox="0 0 1000 120" role="img">
-              <defs>
-                <linearGradient id="pgraphStroke" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#f78cb6" />
-                  <stop offset="52%" stop-color="#e0518c" />
-                  <stop offset="100%" stop-color="#c2356e" />
-                </linearGradient>
-                <linearGradient id="pgraphFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#e0518c" stop-opacity="0.22" />
-                  <stop offset="100%" stop-color="#e0518c" stop-opacity="0" />
-                </linearGradient>
-              </defs>
-              <line class="pgraph-grid" x1="0" y1="30" x2="1000" y2="30" />
-              <line class="pgraph-grid" x1="0" y1="60" x2="1000" y2="60" />
-              <line class="pgraph-grid" x1="0" y1="90" x2="1000" y2="90" />
-              <path class="pgraph-area" d="M0 95 C60 92 95 86 125 85 C200 83 300 58 375 55 C450 52 560 70 625 70 C700 70 800 35 875 25 C930 18 970 18 1000 18 L1000 120 L0 120 Z" fill="url(#pgraphFill)" />
-              <path id="pgraphPath" class="pgraph-line" pathLength="1" d="M0 95 C60 92 95 86 125 85 C200 83 300 58 375 55 C450 52 560 70 625 70 C700 70 800 35 875 25 C930 18 970 18 1000 18" fill="none" stroke="url(#pgraphStroke)" />
-              <g class="pgraph-marker">
-                <circle class="pgraph-dot" r="6" />
-                <animateMotion id="pgraphMotion" begin="indefinite" dur="7s" repeatCount="indefinite" calcMode="spline" keyPoints="0;1;0" keyTimes="0;0.5;1" keySplines="0.16 1 0.3 1;0.16 1 0.3 1">
-                  <mpath xlink:href="#pgraphPath" />
-                </animateMotion>
-              </g>
-            </svg>
-          </div>
-          <div class="ptimeline">
-          <div class="pline" aria-hidden="true"><span class="pline-fill" id="plineFill"></span></div>
-          <ol class="psteps" id="psteps">
-            <li class="pstep">
-              <span class="pnode"><span class="pnum">1</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <h3>Erstgespräch</h3>
-              <p>Wir klären in Ruhe Ihre Ziele, Wünsche und das Budget – kostenlos und unverbindlich.</p>
-            </li>
-            <li class="pstep">
-              <span class="pnode"><span class="pnum">2</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <h3>Konzept &amp; Design</h3>
-              <p>Sie erhalten ein passendes Konzept und ein Design, das zu Ihrer Marke passt.</p>
-            </li>
-            <li class="pstep">
-              <span class="pnode"><span class="pnum">3</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <h3>Entwicklung</h3>
-              <p>Ich setze alles technisch sauber um – schnell, responsiv und suchmaschinen­freundlich.</p>
-            </li>
-            <li class="pstep">
-              <span class="pnode"><span class="pnum">4</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <h3>Launch &amp; Pflege</h3>
-              <p>Ihre Seite geht online. Auf Wunsch übernehme ich die laufende Wartung.</p>
-            </li>
-          </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== Über mich ===================== -->
-    <section class="section section--soft" id="ueber">
-      <div class="container about">
-        <div class="about-card reveal">
-          <img class="about-photo" src="assets/img/tim.jpg" width="96" height="96" alt="Tim Lietzow, Gründer von createtim" loading="lazy" />
-          <h3>Tim Lietzow</h3>
-          <div class="role">Dualer Student &amp; Gründer von createtim</div>
-          <p>Ich bin Tim, der Kopf hinter createtim. Neben meinem dualen Studium baue ich createtim Schritt für Schritt auf und entwickle Websites, die nicht nur gut aussehen, sondern auch funktionieren – persönlich, direkt erreichbar und ohne Umwege über eine große Agentur.</p>
-          <div class="about-contact">
-            <a href="tel:+491629856176"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> +49 162 9856176</a>
-            <a href="mailto:tim.lietzow@createtim.de"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg> tim.lietzow@createtim.de</a>
-            <a href="#kontakt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Hauptstraße 9, 21614 Buxtehude</a>
-          </div>
-        </div>
-
-        <div class="about-text reveal d1">
-          <span class="eyebrow">Über mich</span>
-          <h2>Persönlich, lokal und auf Augenhöhe</h2>
-          <p>createtim ist mein Herzensprojekt neben dem dualen Studium – und Ihr lokaler Ansprechpartner rund um die eigene Website. Statt anonymer Hotline bekommen Sie einen festen Ansprechpartner, der Ihr Projekt von Anfang bis Ende begleitet.</p>
-          <p>Ich stecke viel Zeit und Engagement in jedes Projekt und lerne dabei ständig dazu. Gerade kleine und mittlere Betriebe brauchen einen Auftritt, der professionell wirkt und trotzdem bezahlbar bleibt – und genau da möchte ich helfen.</p>
-
-          <ul class="feature-list">
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Fester Ansprechpartner statt Agentur-Hotline</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Faire, transparente Preise ohne versteckte Kosten</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Aus der Region, für die Region: Buxtehude, Stade &amp; Hamburg</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Auch nach dem Launch für Sie da</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CTA Banner ===================== -->
+    <!-- Live Dashboard -->
     <section class="section">
       <div class="container">
-        <div class="cta-banner reveal">
-          <h2>Bereit für eine Website, die überzeugt?</h2>
-          <p>Lassen Sie uns unverbindlich über Ihr Projekt sprechen. Das Erstgespräch ist kostenlos – Sie gehen kein Risiko ein.</p>
-          <div class="hero-actions">
-            <a href="#kontakt" class="btn btn--light btn--lg">
-              Kostenloses Erstgespräch
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="tel:+491629856176" class="btn btn--outline-light btn--lg">Direkt anrufen</a>
+        <div class="dashboard reveal">
+          <div class="dash-item">
+            <span class="dash-label" data-i18n="dashBuxtehude">Buxtehude</span>
+            <span class="dash-value" id="liveClock">--:--</span>
+            <span class="dash-sub"><span class="dash-dot"></span><span data-i18n="dashLokal">lokal</span></span>
+          </div>
+          <div class="dash-item">
+            <span class="dash-label">GitHub</span>
+            <span class="dash-value" id="ghRepos">--</span>
+            <span class="dash-sub"><a href="https://github.com/tim131103" target="_blank" rel="noopener">tim131103 →</a></span>
+          </div>
+          <div class="dash-item">
+            <span class="dash-label" data-i18n="dashGerade">Gerade</span>
+            <span class="dash-value" style="font-size:1rem" data-i18n="dashGeradeVal">Data Science</span>
+            <span class="dash-sub" data-i18n="dashGeradeSub">Projekt für lokalen Betrieb</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== Preise ===================== -->
-    <section class="section section--soft" id="preise">
+    <!-- Über mich -->
+    <section class="section section--soft">
       <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow eyebrow--center">Preise</span>
-          <h2>Transparente Pakete, faire Preise</h2>
-          <p>Klare Festpreise statt Agentur-Aufschlag. Wählen Sie das passende Website-Paket – das genaue Angebot stimmen wir im kostenlosen Erstgespräch ab.</p>
-        </div>
-
-        <div class="pricing">
-          <article class="price-card reveal">
-            <div class="price-name">Starter</div>
-            <div class="price-tag"><span class="amt">450</span><span class="cur">€</span><span class="per">einmalig</span></div>
-            <p>Der schlanke Auftritt für Einzelunternehmer und kleine Betriebe – kompakt und professionell.</p>
-            <ul class="price-feat">
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Onepage-Website (bis ca. 3 Abschnitte)</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Individuelles, mobil-optimiertes Design</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Kontaktformular</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Impressum &amp; Datenschutz</li>
-            </ul>
-            <a href="#kontakt" class="btn btn--ghost">Paket anfragen</a>
-          </article>
-
-          <article class="price-card featured reveal d1">
-            <span class="price-badge">Beliebt</span>
-            <div class="price-name">Business</div>
-            <div class="price-tag"><span class="amt">900</span><span class="cur">€</span><span class="per">einmalig</span></div>
-            <p>Die mehrseitige Website für Betriebe, die mehr zeigen und besser gefunden werden wollen.</p>
-            <ul class="price-feat">
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Mehrseitige Website (z.&nbsp;B. Start, Leistungen, Über, Kontakt)</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Individuelles Design &amp; Branding</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>SEO-Grundlagen für lokale Sichtbarkeit</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Alles aus dem Starter-Paket</li>
-            </ul>
-            <a href="#kontakt" class="btn btn--primary">Paket anfragen</a>
-          </article>
-
-          <article class="price-card reveal d2">
-            <div class="price-name">Premium</div>
-            <div class="price-tag"><span class="amt">1.500</span><span class="cur">€</span><span class="per">einmalig</span></div>
-            <p>Der umfangreiche Auftritt mit individuellen Funktionen und Feinschliff bis ins Detail.</p>
-            <ul class="price-feat">
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Umfangreiche Website mit Extras</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Erweiterte Funktionen (z.&nbsp;B. Galerie, Blog)</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Performance- &amp; SEO-Optimierung</li>
-              <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Alles aus dem Business-Paket</li>
-            </ul>
-            <a href="#kontakt" class="btn btn--ghost">Paket anfragen</a>
-          </article>
-        </div>
-
-        <div class="price-options reveal d1">
-          <div class="price-opt">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></span>
-            <div><b>Individuelle Webanwendung</b><span>Buchungs-, Verwaltungs- oder Spezialfunktion – nach Aufwand</span></div>
-            <span class="opt-price">60&nbsp;€/Std.</span>
+        <div class="split">
+          <div class="reveal">
+            <img src="assets/img/tim.jpg" alt="Tim Lietzow" class="about-photo" width="280" height="350" loading="lazy" />
           </div>
-          <div class="price-opt">
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l6-6a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></span>
-            <div><b>Wartungspaket Website</b><span>Updates, Backups &amp; Sicherheit – damit alles läuft</span></div>
-            <span class="opt-price">40&nbsp;€/Monat</span>
+          <div class="about-text">
+            <span class="eyebrow" data-i18n="aboutEyebrow">Über mich</span>
+            <h2 class="reveal" data-i18n="aboutH2">Hallo, ich bin Tim.</h2>
+            <p class="reveal" data-i18n="aboutP3">
+              Ich komme aus Buxtehude und kenne die Region. Ich weiß, was lokale
+              Betriebe brauchen — keinen anonymen Dienstleister, sondern jemanden,
+              der direkt vor Ort ist und die Sprache spricht.
+            </p>
+            <p class="reveal" data-i18n="aboutP4">
+              Mein Schwerpunkt liegt auf Data Science und Softwareentwicklung.
+              Aber ich baue auch gerne Websites, wenn's sinnvoll ist.
+              Hauptsache, das Ergebnis funktioniert.
+            </p>
+            <div class="about-links reveal">
+              <a href="mailto:tim.lietzow@createtim.de" data-i18n="aboutEmail">E-Mail</a>
+              <a href="tel:+491629856176" data-i18n="aboutTel">Telefon</a>
+              <a href="https://github.com/tim131103" target="_blank" rel="noopener">GitHub</a>
+            </div>
           </div>
-        </div>
-
-        <div class="price-included reveal d1">
-          <h3>Im Preis enthalten</h3>
-          <ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Persönliche Abstimmung Ihrer Wünsche und Inhalte</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Responsives Design – optimiert für Handy, Tablet und PC</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Bis zu zwei Korrekturschleifen</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Einrichtung von Impressum und Datenschutzerklärung</li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Hilfe bei Domain, Hosting und Veröffentlichung</li>
-          </ul>
-          <p class="price-note">Gemäß § 19 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet. Alle Preise sind Endpreise.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===================== Baukasten-Vergleich ===================== -->
-    <section class="section" id="vergleich">
+    <!-- Galerie -->
+    <section class="section">
       <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow eyebrow--center">vergleich</span>
-          <h2>Baukasten oder <span class="gradient-text">individuelle Website?</span></h2>
-          <p>Wix, Jimdo &amp; Co. versprechen die eigene Website in Minuten – und für den allerersten Eindruck reicht das auch. Wer aber über Google gefunden werden und aus Besuchern Kunden machen will, stößt schnell an Grenzen.</p>
-        </div>
-
-        <div class="compare reveal d1">
-          <div class="compare-card">
-            <h3>Website-Baukasten</h3>
-            <p class="compare-sub">Wix, Jimdo, Onepage &amp; Co.</p>
-            <ul>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Schnell gestartet, geringe Anfangskosten</li>
-              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Vorlagen-Look – sieht aus wie tausend andere Seiten</li>
-              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Viel unnötiger Code – langsamer und damit schlechter für Google</li>
-              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>SEO nur an der Oberfläche steuerbar</li>
-              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Laufende Gebühren &amp; Anbieter-Bindung – ein Umzug ist kaum möglich</li>
-              <li class="no"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Bei Fragen: anonymer Support statt fester Ansprechpartner</li>
-            </ul>
+        <div class="section-label reveal" aria-hidden="true" data-i18n="galleryLabel">Einblicke</div>
+        <h2 class="reveal" style="font-family:var(--font-head); font-weight:400; margin-bottom:1.5rem" data-i18n="galleryH2">Tim & Buxtehude</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">🌸</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery1Title">Am Schreibtisch</strong>
+              <span data-i18n="gallery1Desc">So sieht ein typischer Arbeitstag aus — Daten analysieren, Code schreiben, Kaffee trinken.</span>
+            </div>
           </div>
-
-          <div class="compare-card compare-card--featured">
-            <span class="compare-flag">Mein Ansatz</span>
-            <h3>Individuell von createtim</h3>
-            <p class="compare-sub">Handgemacht für Ihren Betrieb</p>
-            <ul>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Einzigartiges Design, das zu Ihrem Betrieb passt</li>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Handgeschriebener, schlanker Code – Bestwerte bei Ladezeit &amp; PageSpeed</li>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>SEO von Grund auf: saubere Struktur, lokale Suche, strukturierte Daten</li>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Ihre Website gehört Ihnen – kein Lock-in, freier Hosting-Wechsel</li>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Persönlicher Ansprechpartner aus der Region</li>
-              <li class="yes"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Wächst mit: von der Visitenkarte bis zur individuellen Software</li>
-            </ul>
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">🏠</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery2Title">Buxtehude</strong>
+              <span data-i18n="gallery2Desc">Meine Heimat. Die Stadt, für die ich gerne arbeite.</span>
+            </div>
           </div>
-        </div>
-
-        <div class="compare-cta reveal d2">
-          <p>Kurz gesagt: Ein Baukasten ist zur Miete, eine individuelle Website ist Eigentum – und auf lange Sicht meist die günstigere und sichtbarere Lösung.</p>
-          <a href="#kontakt" class="btn btn--primary btn--lg">
-            Unverbindlich beraten lassen
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">🌺</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery3Title">Kirschblüten</strong>
+              <span data-i18n="gallery3Desc">Der Grund, warum ich diese Seite so gestaltet habe.</span>
+            </div>
+          </div>
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">💻</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery4Title">Zeile für Zeile</strong>
+              <span data-i18n="gallery4Desc">Jedes Projekt beginnt mit der ersten Zeile Code.</span>
+            </div>
+          </div>
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">📍</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery5Title">Vor Ort</strong>
+              <span data-i18n="gallery5Desc">Persönlich, nicht anonym. Direkt aus der Nachbarschaft.</span>
+            </div>
+          </div>
+          <div class="gallery-item gallery-placeholder reveal">
+            <span class="gallery-placeholder-icon">🤝</span>
+            <div class="gallery-caption">
+              <strong data-i18n="gallery6Title">Im Gespräch</strong>
+              <span data-i18n="gallery6Desc">Zuhören ist wichtiger als programmieren.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== Kontakt ===================== -->
-    <section class="section section--soft" id="kontakt">
+    <!-- Kontakt -->
+    <section class="section section--soft">
       <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow eyebrow--center">Kontakt</span>
-          <h2>Lassen Sie uns starten</h2>
-          <p>Schreiben Sie mir kurz, worum es geht – ich melde mich zeitnah bei Ihnen zurück.</p>
-        </div>
-
+        <div class="section-label reveal" aria-hidden="true" data-i18n="sectionKontakt">Kontakt</div>
         <div class="contact-grid">
-          <div class="contact-info reveal">
-            <div class="info-item">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
-              <div><b>Telefon</b><a href="tel:+491629856176">+49 162 9856176</a></div>
-            </div>
-            <div class="info-item">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg></span>
-              <div><b>E-Mail</b><a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a></div>
-            </div>
-            <div class="info-item">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-              <div><b>Adresse</b><span>Hauptstraße 9<br>21614 Buxtehude</span></div>
-            </div>
-            <div class="info-item">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-              <div><b>Erreichbarkeit</b><span>Mo–Fr, Antwort i. d. R. innerhalb von 24 h</span></div>
-            </div>
+          <div class="reveal">
+            <h2 data-i18n="kontaktH2">Lassen Sie uns sprechen.</h2>
+            <p style="margin-top:.8rem" data-i18n="kontaktP">
+              Schreiben Sie mir kurz, worum es geht.
+              Ich melde mich zeitnah.
+            </p>
+            <dl class="contact-list" style="margin-top:2rem">
+              <div class="contact-item">
+                <dt data-i18n="kontaktDtEmail">E-Mail</dt>
+                <dd><a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a></dd>
+              </div>
+              <div class="contact-item">
+                <dt data-i18n="KontaktDtTel">Telefon</dt>
+                <dd><a href="tel:+491629856176">+49 162 9856176</a></dd>
+              </div>
+              <div class="contact-item">
+                <dt data-i18n="kontaktDtAdresse">Adresse</dt>
+                <dd data-i18n="kontaktAdresse">Hauptstraße 9, 21614 Buxtehude</dd>
+              </div>
+            </dl>
           </div>
-
-          <!-- Versand über Formspree (AJAX in main.js). Mit JavaScript wird das Formular
-               zum Mehrschritt-Funnel; ohne JavaScript sind alle Schritte untereinander
-               sichtbar und der native POST auf den action-Endpunkt greift als Fallback. -->
-          <form class="form reveal d1" id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST">
-            <!-- Honeypot: für Menschen unsichtbar; füllt ein Bot das Feld, verwirft Formspree die Nachricht -->
-            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <input type="hidden" name="_subject" value="Anfrage über createtim.de" />
-
-            <!-- Fortschrittsanzeige (nur im Funnel-Modus sichtbar) -->
-            <div class="funnel-head">
-              <span class="fstep-label" id="funnelLabel">Schritt 1 von 3</span>
-              <span class="funnel-bar" aria-hidden="true"><i id="funnelBar"></i></span>
-            </div>
-
-            <fieldset class="fstep">
-              <legend>Was kann ich für Sie tun?</legend>
-              <div class="opt-grid">
-                <label class="opt-card">
-                  <input type="radio" name="anliegen" value="Neue Website" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
-                  <span class="opt-txt"><b>Neue Website</b><small>Von der Idee bis online</small></span>
-                </label>
-                <label class="opt-card">
-                  <input type="radio" name="anliegen" value="Wartung &amp; Betreuung" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l6-6a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></span>
-                  <span class="opt-txt"><b>Wartung &amp; Betreuung</b><small>Bestehende Seite pflegen</small></span>
-                </label>
-                <label class="opt-card">
-                  <input type="radio" name="anliegen" value="Software &amp; Automatisierung" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></span>
-                  <span class="opt-txt"><b>Software &amp; Automatisierung</b><small>Tools, KI &amp; individuelle Lösungen</small></span>
-                </label>
-                <label class="opt-card">
-                  <input type="radio" name="anliegen" value="Etwas anderes" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-                  <span class="opt-txt"><b>Etwas anderes</b><small>Einfach kurz beschreiben</small></span>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset class="fstep">
-              <legend>Wann soll es losgehen?</legend>
-              <div class="opt-grid">
-                <label class="opt-card">
-                  <input type="radio" name="zeitrahmen" value="So bald wie möglich" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
-                  <span class="opt-txt"><b>So bald wie möglich</b><small>Am liebsten direkt starten</small></span>
-                </label>
-                <label class="opt-card">
-                  <input type="radio" name="zeitrahmen" value="In den nächsten 3 Monaten" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-                  <span class="opt-txt"><b>In den nächsten Monaten</b><small>Geplant, aber kein Zeitdruck</small></span>
-                </label>
-                <label class="opt-card">
-                  <input type="radio" name="zeitrahmen" value="Noch offen" />
-                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-                  <span class="opt-txt"><b>Noch offen</b><small>Erst mal unverbindlich informieren</small></span>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset class="fstep">
-              <legend>Wie erreiche ich Sie?</legend>
+          <div class="form-card reveal d1">
+            <form id="contactForm" action="https://formspree.io/f/maqzojdb" method="POST">
+              <input type="hidden" name="_subject" value="Anfrage über createtim.de" />
               <div class="field-row">
                 <div class="field">
-                  <label for="name">Name *</label>
-                  <input type="text" id="name" name="name" autocomplete="name" required placeholder="Max Mustermann" />
+                  <label for="name" data-i18n="formName">Name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required placeholder="Max Mustermann" data-i18n-ph="formNamePh" />
                 </div>
                 <div class="field">
-                  <label for="email">E-Mail *</label>
-                  <input type="email" id="email" name="email" autocomplete="email" required placeholder="max@firma.de" />
+                  <label for="email" data-i18n="formEmail">E-Mail</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required placeholder="max@firma.de" data-i18n-ph="formEmailPh" />
                 </div>
               </div>
               <div class="field">
-                <label for="message">Ihre Nachricht *</label>
-                <textarea id="message" name="message" required placeholder="Erzählen Sie mir kurz von Ihrem Projekt …"></textarea>
+                <label for="message" data-i18n="formNachricht">Nachricht</label>
+                <textarea id="message" name="message" required placeholder="Worum geht es?" data-i18n-ph="formMsgPh"></textarea>
               </div>
-              <label class="form-check">
+              <label class="check-row">
                 <input type="checkbox" id="privacy" name="privacy" required />
-                <span>Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung der Anfrage einverstanden. *</span>
+                <span data-i18n="formPrivacy">Datenschutzerklärung gelesen, Verarbeitung ok. *</span>
               </label>
-            </fieldset>
-
-            <div class="form-actions">
-              <button type="button" class="btn btn--back" id="funnelBack" hidden>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                Zurück
+              <button type="submit" class="btn-submit">
+                <span data-i18n="formSubmit">Nachricht senden</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
               </button>
-              <button type="submit" class="btn btn--primary btn--lg">
-                Nachricht senden
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-              </button>
-            </div>
-            <div class="form-status" id="formStatus" role="status"></div>
-            <p class="form-note">* Pflichtfelder. Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet.</p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== FAQ ===================== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head center reveal">
-          <span class="eyebrow eyebrow--center">Häufige Fragen</span>
-          <h2>Gut zu wissen</h2>
-        </div>
-
-        <div class="faq">
-          <details class="faq-item reveal">
-            <summary>Was kostet eine Website?<span class="plus" aria-hidden="true">+</span></summary>
-            <div class="faq-body">Das hängt vom Umfang ab – eine einfache Visitenkarten-Website ist günstiger als ein umfangreicher Auftritt mit vielen Funktionen. Im kostenlosen Erstgespräch klären wir Ihren Bedarf und Sie erhalten ein transparentes Festpreis-Angebot, bevor es losgeht.</div>
-          </details>
-          <details class="faq-item reveal">
-            <summary>Warum nicht einfach ein Baukasten wie Wix oder Jimdo?<span class="plus" aria-hidden="true">+</span></summary>
-            <div class="faq-body">Für einen schnellen ersten Auftritt sind Baukästen in Ordnung. Sie stoßen aber an Grenzen, sobald es um Sichtbarkeit bei Google, Ladezeit und einen eigenständigen Auftritt geht – und die monatlichen Gebühren laufen dauerhaft weiter, während die Seite dem Anbieter gehört. Eine individuelle Website ist Ihr Eigentum, lässt sich frei erweitern und ist auf lange Sicht meist die günstigere Lösung. Mehr dazu im <a href="#vergleich">Vergleich weiter oben</a>.</div>
-          </details>
-          <details class="faq-item reveal">
-            <summary>Wie lange dauert die Umsetzung?<span class="plus" aria-hidden="true">+</span></summary>
-            <div class="faq-body">Eine typische Website für lokale Betriebe ist je nach Umfang in etwa 2 bis 4 Wochen fertig. Den genauen Zeitrahmen stimmen wir gemeinsam ab.</div>
-          </details>
-          <details class="faq-item reveal">
-            <summary>Kümmern Sie sich auch um bestehende Websites?<span class="plus" aria-hidden="true">+</span></summary>
-            <div class="faq-body">Ja. Ich übernehme Pflege, Aktualisierung und Support bestehender Websites – inklusive Updates, Backups und Sicherheits-Checks, damit Ihre Seite zuverlässig läuft.</div>
-          </details>
-          <details class="faq-item reveal">
-            <summary>Für welche Region arbeiten Sie?<span class="plus" aria-hidden="true">+</span></summary>
-            <div class="faq-body">Mein Schwerpunkt liegt auf Buxtehude, Stade und Hamburg. Vieles lässt sich aber auch komplett aus der Ferne umsetzen – sprechen Sie mich einfach an.</div>
-          </details>
+              <div class="form-status" id="formStatus" role="status"></div>
+              <p class="form-note" data-i18n="formNote">* Pflichtfelder. Daten nur zur Bearbeitung Ihrer Anfrage.</p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ===================== Footer ===================== -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <a href="#top" class="brand" aria-label="createtim – Startseite"><span class="brand-mark" aria-hidden="true">c</span><span class="brand-word">create<span class="mid" aria-hidden="true">·</span><b>tim</b></span></a>
-          <p class="footer-about">Moderne Websites, Wartung und SEO für lokale Betriebe in Buxtehude, Stade und Hamburg.</p>
-        </div>
-        <div class="footer-col">
-          <h3>Leistungen</h3>
-          <a href="#leistungen">Webdesign</a>
-          <a href="#leistungen">Webentwicklung</a>
-          <a href="#software">Software &amp; Tools</a>
-          <a href="#leistungen">Wartung &amp; Support</a>
-          <a href="#leistungen">SEO</a>
-        </div>
-        <div class="footer-col">
-          <h3>Navigation</h3>
-          <a href="#skills">Skills</a>
-          <a href="#ablauf">Ablauf</a>
-          <a href="#preise">Preise</a>
-          <a href="#ueber">Über mich</a>
-          <a href="#kontakt">Kontakt</a>
-        </div>
-        <div class="footer-col">
-          <h3>Kontakt</h3>
-          <a href="tel:+491629856176">+49 162 9856176</a>
-          <a href="mailto:tim.lietzow@createtim.de">tim.lietzow@createtim.de</a>
-          <p>Hauptstraße 9<br>21614 Buxtehude</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span id="year">2026</span> createtim · Tim Lietzow</span>
-        <div class="links">
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-        </div>
+    <div class="container footer-inner">
+      <span>&copy; <span id="year">2026</span> createtim &middot; Tim Lietzow</span>
+      <div class="footer-links">
+        <a href="impressum.html" data-i18n="footerImpressum">Impressum</a>
+        <a href="datenschutz.html" data-i18n="footerDatenschutz">Datenschutz</a>
       </div>
     </div>
   </footer>
 
   <button class="to-top" id="toTop" aria-label="Nach oben scrollen">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
   </button>
 
   <script src="assets/js/main.js"></script>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formspree.io https://api.github.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'" />
+  <title>Leistungen · createtim</title>
+  <meta name="description" content="Webdesign, Wartung, SEO und Hosting von createtim – Tim Lietzow aus Buxtehude." />
+  <meta name="theme-color" content="#fff8f5" />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/img/favicon-96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div class="pw-gate" id="pwGate">
+    <svg class="pw-gate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <h2>In Wartung</h2>
+    <p>Diese Seite ist gerade nicht verfügbar.</p>
+    <form id="pwForm" class="pw-bottom">
+      <input type="password" id="pwInput" class="pw-input" placeholder="Passwort" autocomplete="off" />
+      <button type="submit" class="pw-btn">OK</button>
+    </form>
+    <p class="pw-err" id="pwErr">Falsches Passwort.</p>
+  </div>
+
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+  <div class="petal" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="createtim Startseite">
+        <span class="brand-mark" aria-hidden="true">c</span>
+        <span class="brand-word">create<b>tim</b></span>
+      </a>
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="leistungen.html" class="is-active" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="lang-toggle" id="langToggle" aria-label="Sprache wechseln">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langLabel">DE</span>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="nav-links">
+        <a href="leistungen.html" class="is-active" data-i18n="navLeistungen">Leistungen</a>
+        <a href="anwendungen.html" data-i18n="navAnwendungen">Anwendungen</a>
+        <a href="ueber-mich.html" data-i18n="navUeberMich">Über mich</a>
+        <a href="kontakt.html" data-i18n="navKontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+
+    <section class="hero container">
+      <span class="eyebrow reveal" data-i18n="leistungenEyebrow">Leistungen</span>
+      <h1 class="reveal" data-i18n="leistungenH1">Was ich anbiete</h1>
+      <p class="lead reveal d1" data-i18n="leistungenLead">Klare Leistungen, faire Preise. Kein Agentur-Aufschlag.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="service-list">
+          <div class="service-item reveal">
+            <h3 data-i18n="leiWeb">Webdesign</h3>
+            <p data-i18n="leiWebDesc">Modernes, individuelles Design, das zu Ihrer Marke passt. Responsive, schnell und suchmaschinenfreundlich — nicht von der Stange.</p>
+            <div class="service-tags">
+              <span>UI/UX</span>
+              <span>Branding</span>
+              <span>Mobile First</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <h3 data-i18n="leiWartung">Wartung &amp; Support</h3>
+            <p data-i18n="leiWartungDesc">Updates, Backups, Sicherheit und kleine Änderungen — ich halte Ihre Website dauerhaft aktuell und stabil.</p>
+            <div class="service-tags">
+              <span>Updates</span>
+              <span>Backups</span>
+              <span>Sicherheit</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <h3 data-i18n="leiSEO">SEO &amp; Sichtbarkeit</h3>
+            <p data-i18n="leiSEODesc">Damit Kunden Sie bei Google finden: saubere Technik, sinnvolle Keywords und lokale Suchmaschinenoptimierung.</p>
+            <div class="service-tags">
+              <span>Local SEO</span>
+              <span>Google</span>
+              <span>Meta-Tags</span>
+            </div>
+          </div>
+          <div class="service-item reveal">
+            <h3 data-i18n="leiHosting">Hosting &amp; Einrichtung</h3>
+            <p data-i18n="leiHostingDesc">Domain, E-Mail und Hosting — ich richte alles ein, damit Ihre Seite zuverlässig online geht.</p>
+            <div class="service-tags">
+              <span>Hosting</span>
+              <span>Domains</span>
+              <span>E-Mail</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-label reveal" aria-hidden="true" data-i18n="sectionPreise">Preise</div>
+        <div class="pricing reveal">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th data-i18n="preisPaket">Leistung</th>
+                <th data-i18n="preisPreis">Preis</th>
+                <th data-i18n="preisUmfang">Umfang</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="preisWebsites">Websites</td>
+                <td>200–400 &euro;</td>
+                <td data-i18n="preisWebsitesUmfang">Onepager bis mehrseitig, Kontaktformular, responsiv, SEO-Grundlagen</td>
+              </tr>
+              <tr>
+                <td data-i18n="preisAnwendungen">Anwendungen &amp; Automatisierung</td>
+                <td>150–400 &euro;</td>
+                <td data-i18n="preisAnwendungenUmfang">Individuelle Tools, Skripte, Schnittstellen — Preis hängt vom Projekt ab</td>
+              </tr>
+              <tr>
+                <td data-i18n="preisWartung">Wartung</td>
+                <td>40 &euro;/Monat</td>
+                <td data-i18n="preisWartungUmfang">Updates, Backups, Sicherheit</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="pricing-note" data-i18n="preisNote">Gem&auml;&szlig; &sect; 19 UStG keine Umsatzsteuer. Alle Preise Endpreise.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year">2026</span> createtim &middot; Tim Lietzow</span>
+      <div class="footer-links">
+        <a href="impressum.html" data-i18n="footerImpressum">Impressum</a>
+        <a href="datenschutz.html" data-i18n="footerDatenschutz">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
